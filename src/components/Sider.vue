@@ -3,13 +3,54 @@
 <template>
   <a-layout-sider :collapsed="isCollapsed" :width="240">
     <a-menu v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" mode="inline" theme="dark">
-      <a-menu-item key="1">
-        <template #icon>
-          <PieChartOutlined />
+
+      <!-- <template v-for="item1 in menu" :key="item1.name">
+        <a-menu-item v-if="item1.children" :key="item1.name">
+          <template v-if="item1.icon" #icon>
+            <component :is="item1.icon" />
+          </template>
+          <span>{{item1.title}}</span>
+        </a-menu-item>
+        <a-menu-item v-else :key="item1.name">
+          <template v-if="item1.icon" #icon>
+            <component :is="item1.icon" />
+          </template>
+          <span>{{item1.title}}</span>
+        </a-menu-item>
+      </template> -->
+
+      <component v-for="item1 in menu" :key="item1.name" :is="item1.children?'a-sub-menu':'a-menu-item'">
+        <template v-if="item1.icon" #icon>
+          <component :is="item1.icon" />
         </template>
-        <span>Option 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
+        <span>{{item1.title}}</span>
+        <template v-if="item1.children">
+          <component v-for="item2 in item1.children" :key="item2.name" :is="item2.children?'a-sub-menu':'a-menu-item'">
+            <template v-if="item2.icon" #icon>
+              <component :is="item2.icon" />
+            </template>
+            <span>{{item2.title}}</span>
+            <!-- <template v-if="item2.children">
+              <component v-for="item3 in item2.children" :key="item3.name"
+                :is="item3.children?'a-sub-menu':'a-menu-item'">
+                <template v-if="item3.icon" #icon>
+                  <component :is="item3.icon" />
+                </template>
+                <span>{{item3.title}}</span>
+              </component>
+            </template> -->
+          </component>
+        </template>
+      </component>
+
+      <!-- <a-menu-item v-for="item1 in menu" :key="item1.name">
+        <template v-if="item1.icon" #icon>
+          <component :is="item1.icon" />
+        </template>
+        <span>{{item1.title}}</span>
+      </a-menu-item> -->
+
+      <!-- <a-menu-item key="2">
         <template #icon>
           <DesktopOutlined />
         </template>
@@ -42,7 +83,7 @@
           <a-menu-item key="11">Option 11</a-menu-item>
           <a-menu-item key="12">Option 12</a-menu-item>
         </a-sub-menu>
-      </a-sub-menu>
+      </a-sub-menu> -->
     </a-menu>
   </a-layout-sider>
 </template>
