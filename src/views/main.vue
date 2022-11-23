@@ -2,6 +2,7 @@
 <style lang="less" scoped>
 .layout2 {
   height: calc(100vh - 70px);
+  background-color: #fff;
 
   .my-sider {
     overflow-y: auto;
@@ -24,6 +25,7 @@
     <a-layout class="layout2">
       <my-sider class="my-sider"></my-sider>
       <a-layout-content class="my-content">
+        <my-tags></my-tags>
         <router-view v-slot="{ Component }">
           <transition name="move" mode="out-in">
             <keep-alive :include="tagsList">
@@ -63,7 +65,7 @@
 <script lang="ts">
 import myHeader from "../components/Header.vue";
 import mySider from "../components/Sider.vue";
-// import myTags from "../components/Tags.vue";
+import myTags from "../components/Tags.vue";
 import { computed } from "vue";
 import { userStore } from "../stores/counter";
 import { useRoute, useRouter } from "vue-router";
@@ -73,7 +75,7 @@ export default {
   components: {
     myHeader,
     mySider,
-    // myTags,
+    myTags,
   },
   setup() {
     const route = useRoute();

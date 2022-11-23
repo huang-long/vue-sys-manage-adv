@@ -11,7 +11,7 @@ export declare interface Menu {
 export const menuList1: Array<Menu> = [
     {
         id: "M0001",
-        icon: "HomeFilled",
+        icon: "home-filled",
         path: "/home",
         name: "DemoHome",
         componentPath: "home.vue",
@@ -19,7 +19,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0201",
-        icon: "Grid",
+        icon: "profile-filled",
         title: "表格相关",
         children: [
             {
@@ -47,7 +47,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0003",
-        icon: "List",
+        icon: "project-filled",
         path: "/tabs",
         name: "DemoTabs",
         componentPath: "tabs.vue",
@@ -55,7 +55,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0004",
-        icon: "Tickets",
+        icon: "profile-filled",
         title: "表单相关",
         children: [
             {
@@ -103,7 +103,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0091",
-        icon: "SuitcaseLine",
+        icon: "message-filled",
         path: "/MessageBox",
         name: "DemoMessage",
         componentPath: "message.vue",
@@ -111,7 +111,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0009",
-        icon: "PictureRounded",
+        icon: "slack-circle-filled",
         path: "/icon",
         name: "DemoIcon",
         componentPath: "icon.vue",
@@ -119,7 +119,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0010",
-        icon: "TrendCharts",
+        icon: "signal-filled",
         path: "/charts",
         name: "DemoEharts",
         componentPath: "charts.vue",
@@ -127,7 +127,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0020",
-        icon: "Share",
+        icon: "sliders-filled",
         path: "/bpmn",
         name: "DemoBpmn",
         componentPath: "bpmn.vue",
@@ -135,7 +135,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0011",
-        icon: "Orange",
+        icon: "dribbble-circle-filled",
         path: "/i18n",
         name: "DemoI18n",
         componentPath: "i18n.vue",
@@ -143,7 +143,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0016",
-        icon: "Setting",
+        icon: "setting-filled",
         path: "/env",
         name: "DemoEnv",
         componentPath: "env.vue",
@@ -151,7 +151,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0012",
-        icon: "UserFilled",
+        icon: "lock-filled",
         title: "权限处理",
         children: [
             {
@@ -172,7 +172,7 @@ export const menuList1: Array<Menu> = [
     },
     {
         id: "M0015",
-        icon: "Avatar",
+        icon: "smile-filled",
         path: "/donate",
         name: "DemoDonate",
         componentPath: "donate.vue",
@@ -183,7 +183,7 @@ export const menuList1: Array<Menu> = [
 export const menuList2 = [
     {
         id: "M0001",
-        icon: "HomeFilled",
+        icon: "home-filled",
         path: "/home",
         name: "DemoHome",
         componentPath: "home.vue",
@@ -191,7 +191,7 @@ export const menuList2 = [
     },
     {
         id: "M0012",
-        icon: "UserFilled",
+        icon: "lock-filled",
         title: "权限处理",
         children: [
             {
@@ -212,7 +212,7 @@ export const menuList2 = [
     },
     {
         id: "M0015",
-        icon: "Avatar",
+        icon: "smile-filled",
         path: "/donate",
         name: "DemoDonate",
         componentPath: "donate.vue",

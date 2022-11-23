@@ -1,6 +1,71 @@
 
+<template>
+  <div class="my-tags">
+    <a-tabs class="my-tabs" v-model:activeKey="activeKey" type="editable-card" hide-add :destroyInactiveTabPane="true"
+      :style="{ height: '40px' }">
+      <a-tab-pane v-for="item in 20" :key="'tab'+item" :tab="'tab'+item" :closable="true">
+      </a-tab-pane>
+    </a-tabs>
+
+    <div class="ant-tabs ant-tabs-top ant-tabs-card ant-tabs-editable-card ant-tabs-editable my-tabs" data-v-843c5878=""
+      style="height: 40px;">
+      <div role="tablist" class="ant-tabs-nav">
+        <!---->
+        <div ref="tabs" class="ant-tabs-nav-wrap ant-tabs-nav-wrap-ping-right" @wheel.stop="tabsWheel">
+          <div ref="tabsList" class="ant-tabs-nav-list">
+            <div v-for="item in 40" :key="'tab'+item" class="ant-tabs-tab ant-tabs-tab-with-remove">
+              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-0-tab-tab1"
+                aria-controls="rc-tabs-0-panel-tab1">tab{{item}}</div>
+            </div>
+            <!--
+            <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" style="left: 1023px; width: 97px;"></div>-->
+          </div>
+        </div>
+        <div class="ant-tabs-nav-operations">
+          <!--teleport start-->
+          <!--teleport end--><button type="button" class="ant-tabs-nav-more" tabindex="-1" aria-hidden="true"
+            aria-haspopup="listbox" aria-controls="rc-tabs-0-more-popup" id="rc-tabs-0-more" aria-expanded="false"
+            style=""><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false"
+                class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true"
+                viewBox="64 64 896 896">
+                <path
+                  d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z">
+                </path>
+              </svg></span></button>
+          <!---->
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <!-- <div class="ivu-tabs-nav">
+        <div v-for="(item,index) in tagsList" :class="{'ivu-tabs-tab':true, 'ivu-tabs-tab-active': isActive(item.path)}"
+          :key="index">
+          <span @click="goPage(item.path)">{{item.title}}</span>
+          <Icon type="ios-close" size="22" @click="closeTags(index)" />
+        </div>
+      </div>
+
+
+      <div class="tags-right">
+        <Dropdown>
+          <span style="cursor:pointer;">
+            标签选项
+            <Icon type="md-arrow-dropdown" size="20" />
+          </span>
+          <template #list>
+            <DropdownMenu>
+              <DropdownItem @click="closeOther">关闭其他</DropdownItem>
+              <DropdownItem @click="closeAll">关闭所有</DropdownItem>
+            </DropdownMenu>
+          </template>
+        </Dropdown>
+      </div> -->
+  </div>
+
+</template>
 <script lang="ts">
-import { computed, reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import { userStore } from "../stores/counter";
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
@@ -17,6 +82,7 @@ export default {
       return path === route.fullPath;
     };
 
+    let activeKey = ref('tab1');
     // 关闭单个标签
     const closeTags = (index: number) => {
       const delItem = tagsList.value[index];
@@ -71,8 +137,35 @@ export default {
       router.push(path);
     };
 
+
+    let translateX = 0;
+    let tabs = ref();
+    let tabsList = ref();
+    const tabsWheel = (e) => {
+      console.log(e)
+      var deltaX = e.deltaX, deltaY = e.deltaY;
+      var absX = Math.abs(deltaX);
+      var absY = Math.abs(deltaY);
+      if (absX >= absY) {
+        translateX = translateX + deltaX;
+      } else {
+        translateX = translateX + deltaY;
+      }
+      if (translateX < 0) {
+        translateX = 0
+      } else if (translateX > (tabsList.value.width - tabs.value.width)) {
+        translateX = tabsList.value.width - tabs.value.width
+      }
+      tabsList.value.style.transform = `translate(${translateX}px, 0px)`
+      e.preventDefault();
+    }
+
     return {
+      tabs,
+      tabsList,
+      activeKey,
       tagsList,
+      tabsWheel,
       isActive,
       closeTags,
       closeAll,
@@ -82,101 +175,14 @@ export default {
   },
 };
 </script>
-
-<template>
-  <div class="tabs">
-    <div class="ivu-bb">
-      <div class="ivu-tabs-nav">
-        <div v-for="(item,index) in tagsList" :class="{'ivu-tabs-tab':true, 'ivu-tabs-tab-active': isActive(item.path)}"
-          :key="index">
-          <span @click="goPage(item.path)">{{item.title}}</span>
-          <Icon type="ios-close" size="22" @click="closeTags(index)" />
-        </div>
-      </div>
-
-      <div class="tags-right">
-        <Dropdown>
-          <span style="cursor:pointer;">
-            标签选项
-            <Icon type="md-arrow-dropdown" size="20" />
-          </span>
-          <template #list>
-            <DropdownMenu>
-              <DropdownItem @click="closeOther">关闭其他</DropdownItem>
-              <DropdownItem @click="closeAll">关闭所有</DropdownItem>
-            </DropdownMenu>
-          </template>
-        </Dropdown>
-      </div>
-    </div>
-  </div>
-
-</template>
-
 <style lang="less" scoped>
-.tabs {
+.my-tags {
   width: 100%;
+  padding: 5px 10px 0 10px;
 }
-
-.ivu-bb {
-  width: 100%;
-  padding: 2px 0;
-  height: 34px;
-  background-color: #fff;
-  margin: 0 0 10px 0;
-
-  .ivu-tabs-nav {
-    padding: 0 10px;
-    width: ~'calc(100% - 110px)';
-    height: 32px;
-    overflow: hidden;
-
-    .ivu-tabs-tab {
-      margin: 0;
-      margin-right: 4px;
-      height: 31px;
-      padding: 5px 16px 4px;
-      border: 1px solid #dcdee2;
-      border-bottom: 0;
-      border-radius: 4px 4px 0 0;
-      background: #f8f8f9;
-      white-space: nowrap;
-
-      :deep(i) {
-        width: 0;
-        margin: 0 -6px 0 0;
-        height: 22px;
-        vertical-align: middle;
-        overflow: hidden;
-        position: relative;
-        top: -1px;
-        transform-origin: 100% 50%;
-        transition: all 0.3s ease-in-out;
-      }
-    }
-
-    .ivu-tabs-tab-active {
-      height: 32px;
-      background: #fff;
-
-      :deep(i) {
-        width: 22px;
-      }
-    }
-
-    .ivu-tabs-tab:hover {
-      :deep(i) {
-        width: 22px;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-      }
-    }
-  }
-
-  .tags-right {
-    padding: 0 10px;
-    float: right;
-    line-height: 30px;
+.my-tabs {
+  .ant-tabs-content-holder {
+    display: none;
   }
 }
 </style>
