@@ -1,33 +1,31 @@
 export declare interface TableData {
+    key?: string,
     name?: string,
-    age?: string,
+    age?: number,
     address?: string,
-    date?: string
+    tags?: Array<string>
 }
 
 export const tableDataList: Array<TableData> = [
     {
-        name: '张三',
-        age: '18',
-        address: '东大街',
-        date: '2016-10-03'
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        tags: ['nice', 'developer'],
     },
     {
-        name: '李四',
-        age: '24',
-        address: '春熙路',
-        date: '2016-10-01'
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        tags: ['loser'],
     },
     {
-        name: '王五',
-        age: '30',
-        address: '二仙桥',
-        date: '2016-10-02'
-    },
-    {
-        name: '黄六',
-        age: '26',
-        address: '天府一街',
-        date: '2016-10-04'
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
     }
 ];

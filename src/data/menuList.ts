@@ -23,7 +23,7 @@ export const menuList1: Array<Menu> = [
         title: "表格相关",
         children: [
             {
-                id: "M0202",
+                id: "M0201",
                 path: "/table",
                 name: "DemoTable",
                 componentPath: "table.vue",

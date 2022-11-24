@@ -18,6 +18,7 @@ const addMenuRouter = (list: Array<Menu>, parentMenu: Array<Menu>) => {
         name: menu.name,
         meta: {
           title: menu.title,
+          id: menu.id,
           tagsTree: tagsTree
         },
         component: modules[componentPath]

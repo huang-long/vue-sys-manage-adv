@@ -2,7 +2,7 @@
 <style lang="less" scoped>
 .layout2 {
   height: calc(100vh - 70px);
-  background-color: #fff;
+  // background-color: #fff;
 
   .my-sider {
     overflow-y: auto;
@@ -12,10 +12,21 @@
   }
 
   .my-content {
-    overflow-y: auto;
-  }
-  .my-content::-webkit-scrollbar {
-    width: 0;
+    height: calc(100vh - 70px);
+
+    .my-page {
+      overflow-y: auto;
+      height: calc(100vh - 115px);
+      padding: 10px 20px;
+
+      .my-breadcrumb {
+        padding: 0 0 10px 0;
+      }
+    }
+
+    .my-page::-webkit-scrollbar {
+      width: 0;
+    }
   }
 }
 </style>
@@ -26,40 +37,24 @@
       <my-sider class="my-sider"></my-sider>
       <a-layout-content class="my-content">
         <my-tags></my-tags>
-        <router-view v-slot="{ Component }">
-          <transition name="move" mode="out-in">
-            <keep-alive :include="tagsList">
-              <component :is="Component" />
-            </keep-alive>
-          </transition>
-        </router-view>
+        <div class="my-page">
+          <a-breadcrumb class="my-breadcrumb">
+            <a-breadcrumb-item v-for='(item, index) in tagsTree' :key="index">
+              <component v-if="item.icon" :is="item.icon" />
+              {{item.title}}
+            </a-breadcrumb-item>
+          </a-breadcrumb>
+          <router-view v-slot="{ Component }">
+            <transition name="move" mode="out-in">
+              <keep-alive :include="tagsList">
+                <component :is="Component" />
+              </keep-alive>
+            </transition>
+          </router-view>
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
-
-  <!-- <Layout class="layout">
-    <my-header></my-header>
-    <Layout class="ivu-layout-has-sider" :style="{padding: '0'}">
-      <my-menu></my-menu>
-      <Layout :style="{padding: '0'}">
-        <my-tags></my-tags>
-        <div :style="{padding: '0 24px 24px'}">
-          <Breadcrumb :style="{margin: '0 0 10px 0'}">
-            <BreadcrumbItem v-for="item in tagsName" :key="item">{{item}}</BreadcrumbItem>
-          </Breadcrumb>
-          <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-            <router-view v-slot="{ Component }">
-              <transition name="move" mode="out-in">
-                <keep-alive :include="tagsList">
-                  <component :is="Component" />
-                </keep-alive>
-              </transition>
-            </router-view>
-          </Content>
-        </div>
-      </Layout>
-    </Layout>
-  </Layout> -->
 </template>
 
 <script lang="ts">
@@ -83,13 +78,12 @@ export default {
     const tagsList = computed(() =>
       store.tagsList.map((item) => item.name)
     );
-    const tagsName = computed(() =>
-      route.meta.tags
-    );
+
+    const tagsTree = computed(() => route.meta.tagsTree);
     return {
       tagsList,
-      tagsName
-    }
+      tagsTree
+    };
   },
 };
 </script>

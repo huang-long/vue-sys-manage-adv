@@ -2,7 +2,7 @@
   <div class="login" @keydown.enter="handleSubmit()">
     <div class="login-bg">
       <div class="login-ctn">
-        <a-form ref="loginForm" :model="formData" :rules="loginFormRules" class="login-form" :label-col="{ span: 3 }"
+        <a-form ref="loginForm" :model="formData" :rules="loginFormRules" class="login-form" :laba-col="{ span: 3 }"
           :wrapper-col="{ span: 21 }">
           <div class="login-logo">
             <img src="../../images/logo.png" alt="系统管理平台" />
