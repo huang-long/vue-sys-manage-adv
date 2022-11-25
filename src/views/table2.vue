@@ -7,7 +7,7 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">vxe-table</a-divider>
+    <a-divider orientation="left">vxe-table</a-divider>
 
     <div>
       <vxe-table border show-overflow ref="xTable" :column-config="{resizable: true}" :loading="demo1.loading"

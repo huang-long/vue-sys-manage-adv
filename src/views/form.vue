@@ -4,161 +4,151 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://Ant Design Vue.gitee.io/zh-CN/component/form.html" target="_blank">Ant Design Vue form配置</a>
+        <a href="https://www.antdv.com/components/form-cn" target="_blank">Ant Design Vue form配置</a>
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">form</a-divider>
+    <a-divider orientation="left">form</a-divider>
 
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm"
-      :size="formSize" status-icon>
-      <el-form-item label="活动名称" prop="name">
-        <el-input v-model="ruleForm.name" />
-      </el-form-item>
-      <el-form-item label="活动地区" prop="region">
-        <el-select v-model="ruleForm.region" placeholder="地区">
-          <el-option label="成都" value="01" />
-          <el-option label="绵阳" value="02" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="活动数量" prop="count">
-        <el-select-v2 v-model="ruleForm.count" placeholder="数量" :options="options" />
-      </el-form-item>
-      <el-form-item label="活动时间" required>
-        <a-col :span="11">
-          <el-form-item prop="date1">
-            <el-date-picker v-model="ruleForm.date1" type="date" label="日期" placeholder="请选择日期"
-              style="width: 100%" />
-          </el-form-item>
-        </a-col>
-        <a-col class="text-center" :span="2">
-          <span class="text-gray-500">-</span>
-        </a-col>
-        <a-col :span="11">
-          <el-form-item prop="date2">
-            <el-time-picker v-model="ruleForm.date2" label="时间" placeholder="请选择时间"
-              style="width: 100%" />
-          </el-form-item>
-        </a-col>
-      </el-form-item>
-      <el-form-item label="即时活动" prop="delivery">
-        <el-switch v-model="ruleForm.delivery" />
-      </el-form-item>
-      <el-form-item label="活动类型" prop="type">
-        <el-checkbox-group v-model="ruleForm.type">
-          <el-checkbox label="线上活动" name="type" />
-          <el-checkbox label="促销活动" name="type" />
-          <el-checkbox label="离线下活动" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="活动资源" prop="resource">
-        <el-radio-group v-model="ruleForm.resource">
-          <el-radio label="赞助" />
-          <el-radio label="会场" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="活动描述" prop="desc">
-        <el-input v-model="ruleForm.desc" type="textarea" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">创建</el-button>
-        <el-button @click="resetForm(ruleFormRef)">重置</el-button>
-      </el-form-item>
-    </el-form>
+    <a-form :model="formState" name="validate_other" v-bind="formItemLayout" @finishFailed="onFinishFailed"
+      @finish="onFinish">
+      <a-form-item label="Plain Text">
+        <span class="ant-form-text">China</span>
+      </a-form-item>
+      <a-form-item name="select" label="Select" has-feedback
+        :rules="[{ required: true, message: 'Please select your country!' }]">
+        <a-select v-model:value="formState.select" placeholder="Please select a country">
+          <a-select-option value="china">China</a-select-option>
+          <a-select-option value="usa">U.S.A</a-select-option>
+        </a-select>
+      </a-form-item>
+
+      <a-form-item name="select-multiple" label="Select[multiple]"
+        :rules="[{ required: true, message: 'Please select your favourite colors!', type: 'array' }]">
+        <a-select v-model:value="formState['select-multiple']" mode="multiple"
+          placeholder="Please select favourite colors">
+          <a-select-option value="red">Red</a-select-option>
+          <a-select-option value="green">Green</a-select-option>
+          <a-select-option value="blue">Blue</a-select-option>
+        </a-select>
+      </a-form-item>
+
+      <a-form-item label="InputNumber">
+        <a-form-item name="input-number" no-style>
+          <a-input-number v-model:value="formState['input-number']" :min="1" :max="10" />
+        </a-form-item>
+        <span class="ant-form-text">machines</span>
+      </a-form-item>
+
+      <a-form-item name="switch" label="Switch">
+        <a-switch v-model:checked="formState.switch" />
+      </a-form-item>
+
+      <a-form-item name="slider" label="Slider">
+        <a-slider v-model:value="formState.slider" :marks="{
+          0: 'A',
+          20: 'B',
+          40: 'C',
+          60: 'D',
+          80: 'E',
+          100: 'F',
+        }" />
+      </a-form-item>
+
+      <a-form-item name="radio-group" label="Radio.Group">
+        <a-radio-group v-model:value="formState['radio-group']">
+          <a-radio value="a">item 1</a-radio>
+          <a-radio value="b">item 2</a-radio>
+          <a-radio value="c">item 3</a-radio>
+        </a-radio-group>
+      </a-form-item>
+
+      <a-form-item name="radio-button" label="Radio.Button"
+        :rules="[{ required: true, message: 'Please pick an item!' }]">
+        <a-radio-group v-model:value="formState['radio-button']">
+          <a-radio-button value="a">item 1</a-radio-button>
+          <a-radio-button value="b">item 2</a-radio-button>
+          <a-radio-button value="c">item 3</a-radio-button>
+        </a-radio-group>
+      </a-form-item>
+
+      <a-form-item name="checkbox-group" label="Checkbox.Group">
+        <a-checkbox-group v-model:value="formState['checkbox-group']">
+          <a-row>
+            <a-col :span="8">
+              <a-checkbox value="A" style="line-height: 32px">A</a-checkbox>
+            </a-col>
+            <a-col :span="8">
+              <a-checkbox value="B" style="line-height: 32px" disabled>B</a-checkbox>
+            </a-col>
+            <a-col :span="8">
+              <a-checkbox value="C" style="line-height: 32px">C</a-checkbox>
+            </a-col>
+            <a-col :span="8">
+              <a-checkbox value="D" style="line-height: 32px">D</a-checkbox>
+            </a-col>
+            <a-col :span="8">
+              <a-checkbox value="E" style="line-height: 32px">E</a-checkbox>
+            </a-col>
+            <a-col :span="8">
+              <a-checkbox value="F" style="line-height: 32px">F</a-checkbox>
+            </a-col>
+          </a-row>
+        </a-checkbox-group>
+      </a-form-item>
+
+      <a-form-item name="rate" label="Rate">
+        <a-rate v-model:value="formState.rate" allow-half />
+      </a-form-item>
+
+      <a-form-item name="upload" label="Upload" extra="longgggggggggggggggggggggggggggggggggg">
+        <a-upload v-model:fileList="formState.upload" name="logo" action="/upload.do" list-type="picture">
+          <a-button>
+            <template #icon>
+              <UploadOutlined />
+            </template>
+            Click to upload
+          </a-button>
+        </a-upload>
+      </a-form-item>
+
+      <a-form-item label="Dragger">
+        <a-form-item name="dragger" no-style>
+          <a-upload-dragger v-model:fileList="formState.dragger" name="files" action="/upload.do">
+            <p class="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p class="ant-upload-text">Click or drag file to this area to upload</p>
+            <p class="ant-upload-hint">Support for a single or bulk upload.</p>
+          </a-upload-dragger>
+        </a-form-item>
+      </a-form-item>
+
+      <a-form-item :wrapper-col="{ span: 12, offset: 6 }">
+        <a-button type="primary" html-type="submit">Submit</a-button>
+      </a-form-item>
+    </a-form>
   </div>
 </template>
 
 <script lang="ts" setup name="DemoForm">
-import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'Ant Design Vue'
+import { defineComponent, reactive } from 'vue';
+import { UploadOutlined, InboxOutlined } from '@ant-design/icons-vue';
+const formItemLayout = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 14 },
+};
 
-const formSize = ref('default')
-const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive({
-  name: 'Hello',
-  region: '',
-  count: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-})
+const formState = reactive<Record<string, any>>({
+  'input-number': 3,
+  'checkbox-group': ['A', 'B'],
+  rate: 3.5,
+});
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
 
-const rules = reactive<FormRules>({
-  name: [
-    { required: true, message: '请输入姓名', trigger: 'blur' },
-    { min: 3, max: 5, message: '长度3到5', trigger: 'blur' },
-  ],
-  region: [
-    {
-      required: true,
-      message: '请选择地区',
-      trigger: 'change',
-    },
-  ],
-  count: [
-    {
-      required: true,
-      message: '请选择数量',
-      trigger: 'change',
-    },
-  ],
-  date1: [
-    {
-      type: 'date',
-      required: true,
-      message: '请选择日期',
-      trigger: 'change',
-    },
-  ],
-  date2: [
-    {
-      type: 'date',
-      required: true,
-      message: '请选择时间',
-      trigger: 'change',
-    },
-  ],
-  type: [
-    {
-      type: 'array',
-      required: true,
-      message: '请选择活动类型',
-      trigger: 'change',
-    },
-  ],
-  resource: [
-    {
-      required: true,
-      message: '请选择活动资源',
-      trigger: 'change',
-    },
-  ],
-  desc: [
-    { required: true, message: '请输入活动描述', trigger: 'blur' },
-  ],
-})
-
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log('submit!')
-    } else {
-      console.log('error submit!', fields)
-    }
-  })
-}
-
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
-}
-
-const options = Array.from({ length: 10000 }).map((_, idx) => ({
-  value: `${idx + 1}`,
-  label: `${idx + 1}`,
-}))
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
 </script>

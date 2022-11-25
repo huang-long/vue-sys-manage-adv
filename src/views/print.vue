@@ -7,51 +7,61 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">print</a-divider>
+    <a-divider orientation="left">print</a-divider>
 
     <a-row :gutter="24">
-      <el-button type="primary" size="small" icon="Printer" v-print="printObj">打印</el-button>
-      <div id="loading" v-show="printLoading"></div>
+      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <a-button type="primary" size="small" icon="Printer" v-print="printObj">打印</a-button>
+        <div id="loading" v-show="printLoading"></div>
+      </a-col>
     </a-row>
-    <a-divider content-position="center">打印区域</a-divider>
+
+    <a-divider orientation="center">打印区域</a-divider>
+
     <div id="printMe" class="print-area">
-      <el-table :data="tableData" stripe style="width: 100%">
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
-      </el-table>
+      <a-list item-layout="horizontal" :data-source="data">
+        <template #renderItem="{ item }">
+          <a-list-item>
+            <a-list-item-meta
+              description="Ant Design, a design language for background applications, is refined by Ant UED Team">
+              <template #title>
+                <a href="https://www.antdv.com/">{{ item.title }}</a>
+              </template>
+              <template #avatar>
+                <a-avatar src="https://joeschmoe.io/api/v1/random" />
+              </template>
+            </a-list-item-meta>
+          </a-list-item>
+        </template>
+      </a-list>
     </div>
-    <a-divider content-position="center">打印区域</a-divider>
+    <a-divider orientation="center">打印区域</a-divider>
   </div>
 </template>
 
 <script lang="ts" setup name="DemoPrint" directives="print">
-import { ref } from 'vue';
+import { Ref, ref } from 'vue';
 // @ts--ignore 
 // import print from 'vue3-print-nb';
 
-const tableData = [
+interface DataItem {
+  title: string;
+}
+
+const data: Ref<DataItem[]> = ref([
   {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    title: 'Ant Design Title 1',
   },
   {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    title: 'Ant Design Title 2',
   },
   {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    title: 'Ant Design Title 3',
   },
   {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    title: 'Ant Design Title 4',
   },
-]
+]);
 
 let printLoading = ref(true);
 let printObj = ref({
@@ -71,46 +81,6 @@ let printObj = ref({
     console.log('关闭了打印工具')
   }
 })
-let columns = ref([
-  {
-    title: 'Name',
-    key: 'name'
-  },
-  {
-    title: 'Age',
-    key: 'age'
-  },
-  {
-    title: 'Address',
-    key: 'address'
-  }
-])
-let data = ref([
-  {
-    name: 'John Brown',
-    age: 18,
-    address: 'New York No. 1 Lake Park',
-    date: '2016-10-03'
-  },
-  {
-    name: 'Jim Green',
-    age: 24,
-    address: 'London No. 1 Lake Park',
-    date: '2016-10-01'
-  },
-  {
-    name: 'Joe Black',
-    age: 30,
-    address: 'Sydney No. 1 Lake Park',
-    date: '2016-10-02'
-  },
-  {
-    name: 'Jon Snow',
-    age: 26,
-    address: 'Ottawa No. 2 Lake Park',
-    date: '2016-10-04'
-  }
-])
 
 </script>
 <style lang="less" scoped>

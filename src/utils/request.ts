@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 
 // 创建 axios 实例
 const service = axios.create({
@@ -11,26 +11,26 @@ const err = (error: any) => {
   if (error.response) {
     switch (error?.response?.status) {
       case 403:
-        ElMessage.error('403');
+        message.error('403');
         break
       case 500:
-        ElMessage.error('403');
+        message.error('403');
         break
       case 404:
-        ElMessage.error('404');
+        message.error('404');
         break
       case 504:
-        ElMessage.error('504');
+        message.error('504');
         break
       case 401:
-        ElMessage.error('401');
+        message.error('401');
         break
       default:
-        ElMessage.error('系统错误');
+        message.error('系统错误');
         break
     }
   } else if (error?.message) {
-    ElMessage.error(error.message);
+    message.error(error.message);
   }
   return Promise.reject(error)
 }

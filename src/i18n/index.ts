@@ -3,9 +3,9 @@ import { createI18n } from 'vue-i18n';
 import zh from './lang/zh-CN';
 import en from './lang/en-US';
 // @ts-ignore
-// import elUIzh from 'element-plus/dist/locale/zh-cn';
+// import enUS from 'ant-design-vue/es/locale/en_US';
 // @ts-ignore
-// import elUIen from 'element-plus/dist/locale/en';
+// import zhCN from 'ant-design-vue/es/locale/zh_CN';
 
 const i18n = createI18n({
     allowComposition: true,
@@ -13,8 +13,8 @@ const i18n = createI18n({
     legacy: false,
     locale: 'zh-CN',
     messages: {
-        // 'zh-CN': { ...zh, ...elUIzh },
-        // 'en-US': { ...en, ...elUIen }
+        'zh-CN': { ...zh },
+        'en-US': { ...en }
     }
 });
 

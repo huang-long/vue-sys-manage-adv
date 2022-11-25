@@ -38,7 +38,7 @@
 
 
 <script lang="ts">
-import { reactive, ref, toRefs, computed, onMounted } from "vue";
+import { reactive, ref, toRefs, computed, onMounted, watch } from "vue";
 import { userStore } from "../stores/counter";
 import { useRoute, useRouter } from "vue-router";
 
@@ -57,9 +57,19 @@ export default {
       openKeys: []
     });
 
+    watch(() => route.fullPath, (newValue, oldValue) => {
+      const tagsTree = route.meta.tagsTree
+      if (tagsTree instanceof Array) {
+        tagsTree.forEach(item => {
+          state.openKeys.push(item.id)
+        });
+        state.selectedKeys = [route.meta.id]
+      }
+    })
     onMounted(() => {
-      if (route.meta.tagsTree instanceof Array) {
-        route.meta.tagsTree.forEach(item => {
+      const tagsTree = route.meta.tagsTree
+      if (tagsTree instanceof Array) {
+        tagsTree.forEach(item => {
           state.openKeys.push(item.id)
         });
       }

@@ -11,7 +11,7 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">echarts</a-divider>
+    <a-divider orientation="left">echarts</a-divider>
 
     <div id="myChart" style="width: 100%; height: 400px"></div>
   </div>

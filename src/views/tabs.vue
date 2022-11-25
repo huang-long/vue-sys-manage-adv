@@ -7,41 +7,29 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://Ant Design Vue.gitee.io/zh-CN/component/tabs.html" target="_blank">tabs文档</a>
+        <a href="https://www.antdv.com/components/tabs-cn" target="_blank">tabs文档</a>
       </a-col>
     </a-row>
-    <a-divider content-position="left">tabs</a-divider>
-    <el-radio-group v-model="tabPosition" style="margin-bottom: 30px">
-      <el-radio-button label="top">top</el-radio-button>
-      <el-radio-button label="right">right</el-radio-button>
-      <el-radio-button label="bottom">bottom</el-radio-button>
-      <el-radio-button label="left">left</el-radio-button>
-    </el-radio-group>
 
-    <el-tabs :tab-position="tabPosition" style="height: 200px" class="demo-tabs">
-      <el-tab-pane label="User">User</el-tab-pane>
-      <el-tab-pane label="Config">Config</el-tab-pane>
-      <el-tab-pane label="Role">Role</el-tab-pane>
-      <el-tab-pane label="Task">Task</el-tab-pane>
-    </el-tabs>
+    <a-divider orientation="left">tabs</a-divider>
+
+    <a-radio-group v-model:value="tabPosition" style="margin: 8px">
+      <a-radio-button value="top">top</a-radio-button>
+      <a-radio-button value="bottom">bottom</a-radio-button>
+      <a-radio-button value="left">left</a-radio-button>
+      <a-radio-button value="right">right</a-radio-button>
+    </a-radio-group>
+    <a-tabs v-model:activeKey="activeKey" :tab-position="tabPosition" animated>
+      <a-tab-pane key="1" tab="Tab 1">Content of Tab 1</a-tab-pane>
+      <a-tab-pane key="2" tab="Tab 2">Content of Tab 2</a-tab-pane>
+      <a-tab-pane key="3" tab="Tab 3">Content of Tab 3</a-tab-pane>
+    </a-tabs>
   </div>
 </template>
 <script lang="ts" setup name="DemoTabs">
-import { ref } from 'vue'
-const tabPosition = ref('left')
+import { computed, ref } from 'vue';
+const activeKey = ref('1')
+const tabPosition = ref('top');
 </script>
 <style lang="less" scoped>
-.demo-tabs {
-  > .el-tabs__content {
-    padding: 32px;
-    color: #6b778c;
-    font-size: 32px;
-    font-weight: 600;
-  }
-}
-
-.el-tabs--right .el-tabs__content,
-.el-tabs--left .el-tabs__content {
-  height: 100%;
-}
 </style>

@@ -20,13 +20,15 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">Vue Flow</a-divider>
+    <a-divider orientation="left">Vue Flow</a-divider>
 
     <a-row class="mb-4">
-      <el-button type="primary" @click="resetTransform">重置</el-button>
-      <el-button type="primary" @click="updatePos">修改属性</el-button>
-      <el-button type="primary" @click="toggleclass">修改样式</el-button>
-      <el-button type="primary" @click="logToObject">查看属性</el-button>
+      <a-space>
+        <a-button type="primary" @click="resetTransform">重置</a-button>
+        <a-button type="primary" @click="updatePos">修改属性</a-button>
+        <a-button type="primary" @click="toggleclass">修改样式</a-button>
+        <a-button type="primary" @click="logToObject">查看属性</a-button>
+      </a-space>
     </a-row>
 
     <VueFlow fit-view-on-init class="my-flow" v-model="elements">
@@ -54,7 +56,7 @@ import '@vue-flow/core/dist/theme-default.css';
 import { Background, Panel, PanelPosition, Controls } from '@vue-flow/additional-components'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { ref, watch } from 'vue'
-import { ElMessage } from 'Ant Design Vue';
+import { message } from 'ant-design-vue';
 
 const data = [
   { id: '1', type: 'input', label: 'Node 1', position: { x: 250, y: 5 } },
@@ -91,7 +93,7 @@ const updatePos = () => {
 };
 
 const logToObject = () => {
-  ElMessage.info(JSON.stringify(toObject()));
+  message.info(JSON.stringify(toObject()));
 };
 const resetTransform = () => {
   elements.value = data

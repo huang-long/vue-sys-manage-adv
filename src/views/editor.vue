@@ -10,7 +10,7 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">wangEditor</a-divider>
+    <a-divider orientation="left">wangEditor</a-divider>
 
     <div style="border: 1px solid #ccc">
       <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" />

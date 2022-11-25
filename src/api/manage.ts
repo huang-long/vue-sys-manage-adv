@@ -1,6 +1,6 @@
 import { axios } from '@/utils/request';
 import type { AxiosResponse, Method } from 'axios';
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 // import { getContentType } from '../utils/contentType'
 
 const api = {
@@ -93,11 +93,11 @@ export function downloadFile(url: string, fileName: string, parameter: any): any
 
   return downFile(url, parameter).then((data: any) => {
     if (!(data instanceof Blob)) {
-      ElMessage.error('文件下载失败')
+      message.error('文件下载失败')
       return
     }
     if (data.size === 0) {
-      ElMessage.error('文件下载失败')
+      message.error('文件下载失败')
       return
     }
 

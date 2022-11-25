@@ -15,7 +15,7 @@
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">table</a-divider>
+    <a-divider orientation="left">table</a-divider>
 
     <a-table :columns="columns" :data-source="data">
       <template #headerCell="{ column }">

@@ -34,7 +34,7 @@ export const menuList1: Array<Menu> = [
                 path: "/table1",
                 name: "DemoTable1",
                 componentPath: "table1.vue",
-                title: "虚拟化表格",
+                title: "嵌套子表格",
             },
             {
                 id: "M0202",

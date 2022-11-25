@@ -9,11 +9,11 @@
     </a-row>
 
     <div>
-      <a-divider content-position="left">链接下载</a-divider>
+      <a-divider orientation="left">链接下载</a-divider>
       <a href="/sys-api/file/test1.xlsx" :download="fileName">下载</a>
-      <a-divider content-position="left">Blob下载（处理一些特殊情况）</a-divider>
+      <a-divider orientation="left">Blob下载（处理一些特殊情况）</a-divider>
       <a href="javascript:void(0)" @click="download">下载</a>
-      <a-divider content-position="left">Blob图片展示（处理一些特殊情况）</a-divider>
+      <a-divider orientation="left">Blob图片展示（处理一些特殊情况）</a-divider>
       <img style="width:100px;height:100px;" :src="imageUrl">
     </div>
   </div>

@@ -7,74 +7,44 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://Ant Design Vue.gitee.io/zh-CN/component/upload.html" target="_blank">Ant Design Vue upload配置</a>
+        <a href="https://www.antdv.com/components/upload-cn" target="_blank">Ant Design Vue
+          upload配置</a>
       </a-col>
     </a-row>
 
-    <a-divider content-position="left">upload</a-divider>
+    <a-divider orientation="left">upload</a-divider>
 
-    <el-upload class="avatar-uploader" action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-      :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-      <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-      <el-icon v-else class="avatar-uploader-icon">
-        <Plus />
-      </el-icon>
-    </el-upload>
+    <a-upload-dragger v-model:fileList="fileList" name="file" :multiple="true"
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76" @change="handleChange" @drop="handleDrop">
+      <p class="ant-upload-drag-icon">
+        <inbox-outlined></inbox-outlined>
+      </p>
+      <p class="ant-upload-text">Click or drag file to this area to upload</p>
+      <p class="ant-upload-hint">
+        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+        band files
+      </p>
+    </a-upload-dragger>
   </div>
 </template>
 <script lang="ts" setup name="DemoUpload">
-import { ref } from 'vue'
-import { ElMessage } from 'Ant Design Vue'
-import type { UploadProps } from 'Ant Design Vue'
-// import { Plus } from '@Ant Design Vue/icons-vue'
+import { InboxOutlined } from '@ant-design/icons-vue';
+import { message } from 'ant-design-vue';
+import { defineComponent, ref } from 'vue';
+import type { UploadChangeParam } from 'ant-design-vue';
 
-const imageUrl = ref('')
-
-const handleAvatarSuccess: UploadProps['onSuccess'] = (
-  response,
-  uploadFile
-) => {
-  imageUrl.value = URL.createObjectURL(uploadFile.raw!)
-}
-
-const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
-  if (rawFile.type !== 'image/jpeg') {
-    ElMessage.error('Avatar picture must be JPG format!')
-    return false
-  } else if (rawFile.size / 1024 / 1024 > 2) {
-    ElMessage.error('Avatar picture size can not exceed 2MB!')
-    return false
-  }
-  return true
-}
+const handleChange = (info: UploadChangeParam) => {
+      const status = info.file.status;
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    };
 </script>
 
 <style lang="less" scoped>
-.avatar-uploader {
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
-
-  .el-upload {
-    border: 1px dashed var(--el-border-color);
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: var(--el-transition-duration-fast);
-  }
-  .el-upload:hover {
-    border-color: var(--a-color-primary);
-  }
-}
-
-.el-icon.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  text-align: center;
-}
 </style>
