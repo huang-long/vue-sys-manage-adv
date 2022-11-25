@@ -1,5 +1,3 @@
-
-
 <style lang="less" scoped>
 </style>
 <template>
@@ -34,17 +32,21 @@ import { defineComponent, ref } from 'vue';
 import type { UploadChangeParam } from 'ant-design-vue';
 
 const handleChange = (info: UploadChangeParam) => {
-      const status = info.file.status;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    };
-</script>
+  const status = info.file.status;
+  if (status !== 'uploading') {
+    console.log(info.file, info.fileList);
+  }
+  if (status === 'done') {
+    message.success(`${info.file.name} file uploaded successfully.`);
+  } else if (status === 'error') {
+    message.error(`${info.file.name} file upload failed.`);
+  }
+};
+let fileList = ref([])
+const handleDrop = (e: DragEvent) => {
+  console.log(e);
+}
 
+</script>
 <style lang="less" scoped>
 </style>

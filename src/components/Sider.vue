@@ -41,6 +41,7 @@
 import { reactive, ref, toRefs, computed, onMounted, watch } from "vue";
 import { userStore } from "../stores/counter";
 import { useRoute, useRouter } from "vue-router";
+import type { Menu } from '../data/menuList';
 
 export default {
   setup() {
@@ -60,7 +61,7 @@ export default {
     watch(() => route.fullPath, (newValue, oldValue) => {
       const tagsTree = route.meta.tagsTree
       if (tagsTree instanceof Array) {
-        tagsTree.forEach(item => {
+        tagsTree.forEach((item: Menu) => {
           state.openKeys.push(item.id)
         });
         state.selectedKeys = [route.meta.id]
@@ -69,7 +70,7 @@ export default {
     onMounted(() => {
       const tagsTree = route.meta.tagsTree
       if (tagsTree instanceof Array) {
-        tagsTree.forEach(item => {
+        tagsTree.forEach((item: Menu) => {
           state.openKeys.push(item.id)
         });
       }

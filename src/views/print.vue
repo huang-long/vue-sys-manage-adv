@@ -40,7 +40,8 @@
 </template>
 
 <script lang="ts" setup name="DemoPrint" directives="print">
-import { Ref, ref } from 'vue';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 // @ts--ignore 
 // import print from 'vue3-print-nb';
 

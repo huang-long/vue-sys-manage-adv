@@ -123,7 +123,7 @@ export default {
         tabsClass.value = [false, false]
       }
     })
-    const tabsWheel = (e) => {
+    const tabsWheel = (e: WheelEvent) => {
       translateX = translateX - e.deltaY;
       let max = tabs.value.offsetWidth - tabsList.value.offsetWidth
       if (max >= 0) {

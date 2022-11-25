@@ -66,7 +66,7 @@ export default {
           sessionStorage.setItem('token', formData.loginName);
           store.loadMenu();
           router.push("/home");
-        }).catch(msg => { });
+        });
       }
     }
 
