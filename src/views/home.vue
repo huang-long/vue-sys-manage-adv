@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { Dayjs } from 'dayjs';
+import type { Dayjs } from 'dayjs';
 
 const value = ref<Dayjs>();
 // defineExpose无需导入，直接使用

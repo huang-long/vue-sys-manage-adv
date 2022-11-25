@@ -55,20 +55,22 @@ export default {
 
     const state = reactive({
       selectedKeys: [route.meta.id],
-      openKeys: []
+      openKeys: ['']
     });
 
     watch(() => route.fullPath, (newValue, oldValue) => {
       const tagsTree = route.meta.tagsTree
+      state.openKeys = []
       if (tagsTree instanceof Array) {
         tagsTree.forEach((item: Menu) => {
           state.openKeys.push(item.id)
         });
-        state.selectedKeys = [route.meta.id]
       }
+      state.selectedKeys = [route.meta.id]
     })
     onMounted(() => {
       const tagsTree = route.meta.tagsTree
+      state.openKeys = []
       if (tagsTree instanceof Array) {
         tagsTree.forEach((item: Menu) => {
           state.openKeys.push(item.id)
