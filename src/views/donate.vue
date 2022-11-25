@@ -14,8 +14,11 @@
     </a-row>
     <a-divider>其他版本</a-divider>
     <a-row>
-      vue3 + typescript + view ui后台管理系统 
-      https://gitee.com/huanglgln/vue-sys-manage
+      <a-space>
+        <a href="https://gitee.com/huanglgln/vue-sys-manage" target="_blank">vue3 + typescript + view ui后台管理系统</a>
+        <a href="https://gitee.com/huanglgln/vue-sys-manage-el" target="_blank">vue3 + typescript + element plus后台管理系统
+        </a>
+      </a-space>
     </a-row>
   </div>
 </template>

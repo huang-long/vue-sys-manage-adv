@@ -9,8 +9,8 @@ githup地址：[https://github.com/huang-long/vue-sys-manage-adv](https://github
 
 ![Image text](https://gitee.com/huanglgln/vue-sys-manage/raw/master/src/images/page.jpg)
 
-vue3 + typescript + view ui版本：[https://gitee.com/huanglgln/vue-sys-manage](https://gitee.com/huanglgln/vue-sys-manage)
-vue3 + typescript + element plus版本：[https://gitee.com/huanglgln/vue-sys-manage-el](https://gitee.com/huanglgln/vue-sys-manage-el)
+vue3 + typescript + view ui版本：[https://github.com/huang-long/vue-sys-manage](https://github.com/huang-long/vue-sys-manage)
+vue3 + typescript + element plus版本：[https://github.com/huang-long/vue-sys-manage-el](https://github.com/huang-long/vue-sys-manage-el)
 ## Project Setup
 
 ```sh
