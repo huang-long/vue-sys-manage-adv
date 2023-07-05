@@ -78,9 +78,9 @@ export default {
         return item.path === route.fullPath;
       });
       if (!isExist) {
-        if (tagsList.value.length >= 8) {
-          store.delTagsItem(0);
-        }
+        // if (tagsList.value.length >= 8) {
+        //   store.delTagsItem(0);
+        // }
         store.addTagsItem({
           name: route.name as string,
           title: route.meta.title as string,
