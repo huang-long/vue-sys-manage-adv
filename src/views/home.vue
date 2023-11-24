@@ -83,9 +83,7 @@
       <a-col v-for="(item, index) in messageList" :span="4" :key="index">
         <a-card hoverable="true" :body-style="{ padding: '0px' }">
           <div class="grid-message">
-            <el-icon class="grid-msg-icon" :style="{ background: item.color }">
-              <component :is="item.icon" />
-            </el-icon>
+            <component class="grid-msg-icon" :style="{ background: item.color }" :is="item.icon" />
             <div class="grid-msg-right">
               <div class="grid-msg-num" :style="{ color: item.color }">{{ item.count }}</div>
               <div>{{ item.name }}</div>
@@ -119,12 +117,10 @@
                 </template>
               </a-dropdown>
             </h1>
-            <p>
-              80%
-            </p>
+            <p>80%</p>
             <div>
               <p>型号：HW20349</p>
-              <el-progress :text-inside="true" :stroke-width="24" :percentage="80" status="success" />
+              <a-progress :percent="80" status="active" />
             </div>
           </div>
         </a-card>
@@ -338,25 +334,25 @@ const columns1 = [
     title: '姓名',
     dataIndex: 'name',
     key: 'name',
-    with: 120
+    width: 120
   },
   {
     title: '性别',
     dataIndex: 'sex',
     key: 'sex',
-    with: 80
+    width: 80
   },
   {
     title: '出生日期',
     dataIndex: 'date',
     key: 'date',
-    with: 140
+    width: 140
   },
   {
     title: '邮箱',
     dataIndex: 'email',
     key: 'email',
-    with: 180
+    width: 180
   },
   {
     title: '住址',
@@ -387,7 +383,7 @@ const columns2 = [
     title: '序号',
     dataIndex: 'no',
     key: 'no',
-    with: 80
+    width: 80
   },
   {
     title: '消息',
