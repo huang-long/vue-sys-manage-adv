@@ -42,7 +42,7 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://antv-g6.gitee.io/zh/docs/api/Graph" target="_blank">antv g6官方文档</a>
+        <a href="https://g6.antv.antgroup.com/api/Graph" target="_blank">antv g6官方文档</a>
       </a-col>
     </a-row>
 
@@ -243,6 +243,9 @@ const initAntvG6Graph = () => {
     // fitView: true,
     layout: {
       type: "forceAtlas2", // 建议（force2, forceAtlas2），值：random, radial, mds, circular, fruchterman, force, gForce, force2, forceAtlas2, dagre, concentric, grid
+      preventOverlap: true, // 防止节点重叠
+      prune: false,
+      kr: 30,
     },
     modes: {
       default: ["drag-canvas", "drag-node", "zoom-canvas"],
