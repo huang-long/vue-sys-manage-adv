@@ -81,7 +81,7 @@
     <!-- 待办、已办、办结、消息、预警 -->
     <a-row :gutter="20" class="mgb20">
       <a-col v-for="(item, index) in messageList" :span="4" :key="index">
-        <a-card hoverable="true" :body-style="{ padding: '0px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '0px' }">
           <div class="grid-message">
             <component class="grid-msg-icon" :style="{ background: item.color }" :is="item.icon" />
             <div class="grid-msg-right">
@@ -96,7 +96,7 @@
     <!-- 市场占比 销售数量 总销售额 成本-->
     <a-row :gutter="20" class="mgb20">
       <a-col :span="6">
-        <a-card hoverable="true" :body-style="{ padding: '0px 10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '0px 10px' }">
           <div class="chart-cont">
             <h1>
               <span>市场占比</span>
@@ -127,7 +127,7 @@
       </a-col>
 
       <a-col :span="6">
-        <a-card hoverable="true" :body-style="{ padding: '0px 10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '0px 10px' }">
           <div class="chart-cont">
             <h1>
               <span>销售数量</span>
@@ -157,7 +157,7 @@
       </a-col>
 
       <a-col :span="6">
-        <a-card hoverable="true" :body-style="{ padding: '0px 10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '0px 10px' }">
           <div class="chart-cont">
             <h1>
               <span>总销售额</span>
@@ -187,7 +187,7 @@
       </a-col>
 
       <a-col :span="6">
-        <a-card hoverable="true" :body-style="{ padding: '0px 10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '0px 10px' }">
           <div class="chart-cont">
             <h1>
               <span>投入成本</span>
@@ -204,12 +204,12 @@
     <!-- -->
     <a-row :gutter="20" class="mgb20">
       <a-col :span="8">
-        <a-card hoverable="true" :body-style="{ padding: '10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '10px' }">
           <div class="chart-cont2" ref="refChart4"></div>
         </a-card>
       </a-col>
       <a-col :span="16">
-        <a-card hoverable="true" :body-style="{ padding: '10px' }">
+        <a-card :hoverable="true" :body-style="{ padding: '10px' }">
           <div class="chart-cont2" ref="refChart5"></div>
         </a-card>
       </a-col>
@@ -218,7 +218,7 @@
     <!-- -->
     <a-row :gutter="20" class="mgb20">
       <a-col :span="16">
-        <a-card hoverable="true" title="人员信息" :body-style="{ padding: '10px' }">
+        <a-card :hoverable="true" title="人员信息" :body-style="{ padding: '10px' }">
           <template #extra>
             <a class="ant-dropdown-link" @click.prevent>更多</a>
           </template>
@@ -226,7 +226,7 @@
         </a-card>
       </a-col>
       <a-col :span="8">
-        <a-card hoverable="true" title="我的消息" :body-style="{ padding: '10px' }">
+        <a-card :hoverable="true" title="我的消息" :body-style="{ padding: '10px' }">
           <template #extra>
             <a class="ant-dropdown-link" @click.prevent>更多</a>
           </template>
