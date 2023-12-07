@@ -11,7 +11,7 @@ import { i18n } from './i18n'
 import './assets/main.css'
 //导入所有图标库
 import * as Icons from "@ant-design/icons-vue";
-import print from 'vue3-print-nb'
+import Print from 'vue3-print-ts'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -23,5 +23,5 @@ for (const [name, comp] of Object.entries(Icons)) {
     app.component(name, comp);
 }
 app.use(VXETable)
-app.use(print)
+app.directive("print", Print);
 app.mount('#app')

@@ -3,7 +3,7 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://github.com/Power-kxLee/vue-print-nb#vue3-version" target="_blank">vue-print-nb</a>
+        <a href="https://github.com/huang-long/vue3-print-ts" target="_blank">vue-print-ts</a>
       </a-col>
     </a-row>
 
@@ -42,8 +42,7 @@
 <script lang="ts" setup name="DemoPrint" directives="print">
 import type { Ref } from 'vue';
 import { ref } from 'vue';
-// @ts--ignore 
-// import print from 'vue3-print-nb';
+import type { PrintConf } from 'vue3-print-ts';
 
 interface DataItem {
   title: string;
@@ -65,21 +64,16 @@ const data: Ref<DataItem[]> = ref([
 ]);
 
 let printLoading = ref(true);
-let printObj = ref({
-  id: "printMe",
-  popTitle: 'good print',
-  extraCss: "https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.css, https://cdn.bootcdn.net/ajax/libs/hover.css/2.3.1/css/hover-min.css",
+let printObj = ref<PrintConf>({
+  ids: "printMe",
+  printTitle: '打印测试',
   extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>',
-  beforeOpenCallback(vue: { printLoading: boolean; }) {
-    vue.printLoading = true
-    console.log('打开之前')
+  showBackground: true,
+  beforePrint() {
+    console.log('打印之前')
   },
-  openCallback(vue: { printLoading: boolean; }) {
-    vue.printLoading = false
-    console.log('打开打印页面')
-  },
-  closeCallback(vue: any) {
-    console.log('关闭了打印工具')
+  afterPrint() {
+    console.log('打印之后')
   }
 })
 
