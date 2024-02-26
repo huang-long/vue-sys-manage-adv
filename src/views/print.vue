@@ -11,8 +11,8 @@
 
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-        <a-button type="primary" size="small" icon="Printer" v-print="printObj">打印</a-button>
-        <div id="loading" v-show="printLoading"></div>
+        <a-button v-print="printObj" type="primary" size="small" icon="Printer">打印</a-button>
+        <div v-show="printLoading" id="loading"></div>
       </a-col>
     </a-row>
 
@@ -22,8 +22,7 @@
       <a-list item-layout="horizontal" :data-source="data">
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-list-item-meta
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team">
+            <a-list-item-meta description="Ant Design, a design language for background applications, is refined by Ant UED Team">
               <template #title>
                 <a href="https://www.antdv.com/">{{ item.title }}</a>
               </template>
@@ -40,9 +39,9 @@
 </template>
 
 <script lang="ts" setup name="DemoPrint" directives="print">
-import type { Ref } from 'vue';
-import { ref } from 'vue';
-import type { PrintConf } from 'vue3-print-ts';
+import type { Ref } from "vue";
+import { ref } from "vue";
+import type { PrintConf } from "vue3-print-ts";
 
 interface DataItem {
   title: string;
@@ -50,33 +49,32 @@ interface DataItem {
 
 const data: Ref<DataItem[]> = ref([
   {
-    title: 'Ant Design Title 1',
+    title: "Ant Design Title 1",
   },
   {
-    title: 'Ant Design Title 2',
+    title: "Ant Design Title 2",
   },
   {
-    title: 'Ant Design Title 3',
+    title: "Ant Design Title 3",
   },
   {
-    title: 'Ant Design Title 4',
+    title: "Ant Design Title 4",
   },
 ]);
 
-let printLoading = ref(true);
-let printObj = ref<PrintConf>({
+const printLoading = ref(true);
+const printObj = ref<PrintConf>({
   ids: "printMe",
-  printTitle: '打印测试',
+  printTitle: "打印测试",
   extraHead: '<meta http-equiv="Content-Language"content="zh-cn"/>',
   showBackground: true,
   beforePrint() {
-    console.log('打印之前')
+    console.log("打印之前");
   },
   afterPrint() {
-    console.log('打印之后')
-  }
-})
-
+    console.log("打印之后");
+  },
+});
 </script>
 <style lang="less" scoped>
 .print-area {

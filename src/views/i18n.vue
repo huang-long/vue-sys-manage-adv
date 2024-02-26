@@ -1,5 +1,3 @@
-<style lang="less" scoped>
-</style>
 <template>
   <div class="container">
     <a-row :gutter="24">
@@ -15,37 +13,34 @@
 
     <a-row :gutter="24">
       通过切换语言按钮，来改变当前内容的语言。
-      <a-button type="primary" @click="changeLang()" size="small">切换语言</a-button>
+      <a-button type="primary" size="small" @click="changeLang()">切换语言</a-button>
     </a-row>
 
     <a-divider orientation="left">vue3 vue-i18n</a-divider>
 
     <a-row>
       <a-descriptions :title="t('oldManAndSea.title')" :column="1" size="small">
-        <a-descriptions-item label="1.">{{t('oldManAndSea.famous[0]')}}</a-descriptions-item>
-        <a-descriptions-item label="2.">{{t('oldManAndSea.famous[1]')}}</a-descriptions-item>
-        <a-descriptions-item label="3.">{{t('oldManAndSea.famous[2]')}}</a-descriptions-item>
-        <a-descriptions-item label="5.">{{t('oldManAndSea.famous[3]')}}</a-descriptions-item>
-        <a-descriptions-item label="5.">{{t('oldManAndSea.famous[4]')}}</a-descriptions-item>
+        <a-descriptions-item label="1.">{{ t("oldManAndSea.famous[0]") }}</a-descriptions-item>
+        <a-descriptions-item label="2.">{{ t("oldManAndSea.famous[1]") }}</a-descriptions-item>
+        <a-descriptions-item label="3.">{{ t("oldManAndSea.famous[2]") }}</a-descriptions-item>
+        <a-descriptions-item label="5.">{{ t("oldManAndSea.famous[3]") }}</a-descriptions-item>
+        <a-descriptions-item label="5.">{{ t("oldManAndSea.famous[4]") }}</a-descriptions-item>
       </a-descriptions>
     </a-row>
 
     <a-divider orientation="left">Ant Design Vue i18n</a-divider>
 
     <a-config-provider :locale="locale">
-       <a-pagination :total="50" show-size-changer />
+      <a-pagination :total="50" show-size-changer />
     </a-config-provider>
   </div>
 </template>
-
 <script lang="ts" setup name="DemoI18n">
 import { useI18n } from "vue-i18n";
 import type { ComponentInternalInstance } from "vue";
 import { getCurrentInstance, computed } from "vue";
-// @ts-ignore
-import enUS from 'ant-design-vue/es/locale/en_US';
-// @ts-ignore
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import enUS from "ant-design-vue/es/locale/en_US";
+import zhCN from "ant-design-vue/es/locale/zh_CN";
 
 const { t } = useI18n();
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
@@ -60,3 +55,5 @@ const changeLang = () => {
   }
 };
 </script>
+
+<style lang="less" scoped></style>

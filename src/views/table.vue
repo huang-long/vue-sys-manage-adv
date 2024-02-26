@@ -1,11 +1,3 @@
-
-<style lang="less" scoped>
-.page {
-  padding: 10px 0;
-  display: flex;
-  justify-content: right;
-}
-</style>
 <template>
   <div class="container">
     <a-row :gutter="24">
@@ -35,8 +27,7 @@
         </template>
         <template v-else-if="column.key === 'tags'">
           <span>
-            <a-tag v-for="tag in record.tags" :key="tag"
-              :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
+            <a-tag v-for="tag in record.tags" :key="tag" :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'">
               {{ tag.toUpperCase() }}
             </a-tag>
           </span>
@@ -57,11 +48,10 @@
     </a-table>
   </div>
 </template>
-
 <script lang="ts">
 import { tableDataList } from "../data/tableList";
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { ref } from 'vue';
+import { SmileOutlined, DownOutlined } from "@ant-design/icons-vue";
+import { ref } from "vue";
 
 export default {
   name: "DemoTable",
@@ -70,39 +60,46 @@ export default {
     DownOutlined,
   },
   setup() {
-
     const columns = ref([
       {
-        name: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        name: "Name",
+        dataIndex: "name",
+        key: "name",
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: "Age",
+        dataIndex: "age",
+        key: "age",
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: "Address",
+        dataIndex: "address",
+        key: "address",
       },
       {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
+        title: "Tags",
+        key: "tags",
+        dataIndex: "tags",
       },
       {
-        title: 'Action',
-        key: 'action',
+        title: "Action",
+        key: "action",
       },
     ]);
-    const data = ref(tableDataList)
+    const data = ref(tableDataList);
 
     return {
       data,
       columns,
     };
   },
-}
+};
 </script>
+
+<style lang="less" scoped>
+.page {
+  padding: 10px 0;
+  display: flex;
+  justify-content: right;
+}
+</style>

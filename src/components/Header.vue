@@ -1,34 +1,34 @@
 <template>
   <a-layout-header class="header">
     <a-row>
-      <a-col span="6" class="header-title">        
-        <component @click="collapsedSider" :is="isCollapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'" />
+      <a-col span="6" class="header-title">
+        <component :is="isCollapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'" @click="collapsedSider" />
         <span>后台管理系统</span>
       </a-col>
 
       <a-col span="18" class="header-menu">
-        <component @click="toggleFullscreen" :is="isScreenfull ? 'fullscreen-exit-outlined' : 'fullscreen-outlined'" />
+        <component :is="isScreenfull ? 'fullscreen-exit-outlined' : 'fullscreen-outlined'" @click="toggleFullscreen" />
 
         <div class="btn-bell">
           <a-tooltip placement="bottom">
             <template #title>
-              <span>{{message ? `有${message}条未读消息` : `消息中心`}}</span>
+              <span>{{ message ? `有${message}条未读消息` : `消息中心` }}</span>
             </template>
             <bell-outlined />
           </a-tooltip>
 
-          <span class="btn-bell-badge" v-if="message"></span>
+          <span v-if="message" class="btn-bell-badge"></span>
         </div>
 
         <div class="header-user">
-          <img class="header-photo" src="../images/tx.jpg">
+          <img class="header-photo" src="../images/tx.jpg" />
           <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>
-              {{username}}
+              {{ username }}
               <DownOutlined />
             </a>
             <template #overlay>
-              <a-menu @click="onClick">
+              <a-menu>
                 <a-menu-item key="1" @click="goGit">仓库地址</a-menu-item>
                 <a-menu-item key="2">修改密码</a-menu-item>
                 <a-menu-item key="3" @click="signOut">退出</a-menu-item>
@@ -41,8 +41,8 @@
   </a-layout-header>
 </template>
 <script lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { userStore } from "../stores/counter";
 import screenfull from "screenfull";
 
@@ -51,32 +51,32 @@ export default {
     // 获取store
     const store = userStore();
     const router = useRouter();
-    let isCollapsed = computed(() => store.meunIsCollapsed);
-    let username = computed(() => store.loginUser);
-    let isScreenfull = ref(false);
-    let message = ref(2);
+    const isCollapsed = computed(() => store.meunIsCollapsed);
+    const username = computed(() => store.loginUser);
+    const isScreenfull = ref(false);
+    const message = ref(2);
 
     // 侧边栏折叠
     const collapsedSider = () => {
       store.setMeunIsCollapsed(!isCollapsed.value);
-    }
+    };
 
     const goGit = () => {
-      window.open("https://gitee.com/huanglgln/vue-sys-manage-adv")
-    }
+      window.open("https://gitee.com/huanglgln/vue-sys-manage-adv");
+    };
 
     const signOut = () => {
       store.setLoginUser("");
-      sessionStorage.removeItem('token');
+      sessionStorage.removeItem("token");
       router.push("/login");
-    }
+    };
 
     const toggleFullscreen = () => {
       //判断是否支持全屏
       if (screenfull.isEnabled) {
-        screenfull.toggle()
+        screenfull.toggle();
       }
-    }
+    };
 
     screenfull.onchange(() => {
       isScreenfull.value = !isScreenfull.value;
@@ -90,7 +90,7 @@ export default {
       collapsedSider,
       signOut,
       toggleFullscreen,
-      goGit
+      goGit,
     };
   },
 };
@@ -166,9 +166,11 @@ export default {
     height: 60px;
     display: flex;
     align-items: center;
+
     > img {
       margin-right: 10px;
     }
+
     :deep(i) {
       margin: 0;
     }

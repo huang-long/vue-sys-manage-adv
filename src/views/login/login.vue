@@ -2,8 +2,7 @@
   <div class="login" @keydown.enter="handleSubmit()">
     <div class="login-bg">
       <div class="login-ctn">
-        <a-form ref="loginForm" :model="formData" :rules="loginFormRules" class="login-form" :laba-col="{ span: 3 }"
-          :wrapper-col="{ span: 21 }">
+        <a-form ref="loginForm" :model="formData" :rules="loginFormRules" class="login-form" :laba-col="{ span: 3 }" :wrapper-col="{ span: 21 }">
           <div class="login-logo">
             <img src="../../images/logo.png" alt="系统管理平台" />
           </div>
@@ -13,8 +12,7 @@
           </a-form-item>
 
           <a-form-item label="密码:" name="password">
-            <a-input v-model:value="formData.password" type="password" class="input" placeholder="请输入密码"
-              autocomplete="off" />
+            <a-input v-model:value="formData.password" type="password" class="input" placeholder="请输入密码" autocomplete="off" />
           </a-form-item>
 
           <a-row class="row-regist">
@@ -30,7 +28,7 @@
   </div>
 </template>
 <script lang="ts">
-import type { Rule } from 'ant-design-vue/es/form';
+import type { Rule } from "ant-design-vue/es/form";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { userStore } from "../../stores/counter";
@@ -44,31 +42,31 @@ export default {
     const loginFormRules: Record<string, Rule[]> = {
       loginName: [{ required: true, message: "不能为空", trigger: "blur" }],
       password: [{ required: true, message: "不能为空", trigger: "blur" }],
-    }
-    let formData = reactive({
+    };
+    const formData = reactive({
       loginName: "admin",
       password: "123456",
     });
 
     const register = () => {
       router.push("/register");
-    }
+    };
 
     const resetPassword = () => {
       router.push("/resetPassword");
-    }
+    };
 
-    let loginForm = ref();
+    const loginForm = ref();
     const handleSubmit = () => {
-      if (loginForm) {
+      if (loginForm.value) {
         loginForm.value.validate().then(() => {
           store.setLoginUser(formData.loginName);
-          sessionStorage.setItem('token', formData.loginName);
+          sessionStorage.setItem("token", formData.loginName);
           store.loadMenu();
           router.push("/home");
         });
       }
-    }
+    };
 
     return {
       loginForm,
@@ -76,11 +74,11 @@ export default {
       loginFormRules,
       register,
       resetPassword,
-      handleSubmit
+      handleSubmit,
     };
   },
 };
 </script>
 <style lang="less" scoped>
-@import './login.less';
+@import "./login.less";
 </style>

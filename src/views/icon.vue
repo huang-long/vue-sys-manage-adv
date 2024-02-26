@@ -15,14 +15,11 @@
       </a-col>
     </a-row>
 
-    <div class="code">
-      npm install --save @ant-design/icons-vue
-    </div>
+    <div class="code">npm install --save @ant-design/icons-vue</div>
   </div>
 </template>
 
-<script lang="ts" setup name="DemoIcon">
-</script>
+<script lang="ts" setup name="DemoIcon"></script>
 <style lang="less" scoped>
 .code {
   background: #f5f5f5;

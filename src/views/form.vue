@@ -1,4 +1,3 @@
-
 <template>
   <div class="container">
     <a-row :gutter="24">
@@ -10,145 +9,125 @@
 
     <a-divider orientation="left">form</a-divider>
 
-    <a-form :model="formState" name="validate_other" v-bind="formItemLayout" @finishFailed="onFinishFailed"
-      @finish="onFinish">
-      <a-form-item label="Plain Text">
-        <span class="ant-form-text">China</span>
+    <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+      <a-form-item ref="name" label="Activity name" name="name">
+        <a-input v-model:value="formState.name" />
       </a-form-item>
-      <a-form-item name="select" label="Select" has-feedback
-        :rules="[{ required: true, message: 'Please select your country!' }]">
-        <a-select v-model:value="formState.select" placeholder="Please select a country">
-          <a-select-option value="china">China</a-select-option>
-          <a-select-option value="usa">U.S.A</a-select-option>
+      <a-form-item label="Activity zone" name="region">
+        <a-select v-model:value="formState.region" placeholder="please select your zone">
+          <a-select-option value="shanghai">Zone one</a-select-option>
+          <a-select-option value="beijing">Zone two</a-select-option>
         </a-select>
       </a-form-item>
-
-      <a-form-item name="select-multiple" label="Select[multiple]"
-        :rules="[{ required: true, message: 'Please select your favourite colors!', type: 'array' }]">
-        <a-select v-model:value="formState['select-multiple']" mode="multiple"
-          placeholder="Please select favourite colors">
-          <a-select-option value="red">Red</a-select-option>
-          <a-select-option value="green">Green</a-select-option>
-          <a-select-option value="blue">Blue</a-select-option>
-        </a-select>
+      <a-form-item label="Activity time" required name="date1">
+        <a-date-picker v-model:value="formState.date1" show-time type="date" placeholder="Pick a date" style="width: 100%" />
       </a-form-item>
-
-      <a-form-item label="InputNumber">
-        <a-form-item name="input-number" no-style>
-          <a-input-number v-model:value="formState['input-number']" :min="1" :max="10" />
-        </a-form-item>
-        <span class="ant-form-text">machines</span>
+      <a-form-item label="Instant delivery" name="delivery">
+        <a-switch v-model:checked="formState.delivery" />
       </a-form-item>
-
-      <a-form-item name="switch" label="Switch">
-        <a-switch v-model:checked="formState.switch" />
-      </a-form-item>
-
-      <a-form-item name="slider" label="Slider">
-        <a-slider v-model:value="formState.slider" :marks="{
-          0: 'A',
-          20: 'B',
-          40: 'C',
-          60: 'D',
-          80: 'E',
-          100: 'F',
-        }" />
-      </a-form-item>
-
-      <a-form-item name="radio-group" label="Radio.Group">
-        <a-radio-group v-model:value="formState['radio-group']">
-          <a-radio value="a">item 1</a-radio>
-          <a-radio value="b">item 2</a-radio>
-          <a-radio value="c">item 3</a-radio>
-        </a-radio-group>
-      </a-form-item>
-
-      <a-form-item name="radio-button" label="Radio.Button"
-        :rules="[{ required: true, message: 'Please pick an item!' }]">
-        <a-radio-group v-model:value="formState['radio-button']">
-          <a-radio-button value="a">item 1</a-radio-button>
-          <a-radio-button value="b">item 2</a-radio-button>
-          <a-radio-button value="c">item 3</a-radio-button>
-        </a-radio-group>
-      </a-form-item>
-
-      <a-form-item name="checkbox-group" label="Checkbox.Group">
-        <a-checkbox-group v-model:value="formState['checkbox-group']">
-          <a-row>
-            <a-col :span="8">
-              <a-checkbox value="A" style="line-height: 32px">A</a-checkbox>
-            </a-col>
-            <a-col :span="8">
-              <a-checkbox value="B" style="line-height: 32px" disabled>B</a-checkbox>
-            </a-col>
-            <a-col :span="8">
-              <a-checkbox value="C" style="line-height: 32px">C</a-checkbox>
-            </a-col>
-            <a-col :span="8">
-              <a-checkbox value="D" style="line-height: 32px">D</a-checkbox>
-            </a-col>
-            <a-col :span="8">
-              <a-checkbox value="E" style="line-height: 32px">E</a-checkbox>
-            </a-col>
-            <a-col :span="8">
-              <a-checkbox value="F" style="line-height: 32px">F</a-checkbox>
-            </a-col>
-          </a-row>
+      <a-form-item label="Activity type" name="type">
+        <a-checkbox-group v-model:value="formState.type">
+          <a-checkbox value="1" name="type">Online</a-checkbox>
+          <a-checkbox value="2" name="type">Promotion</a-checkbox>
+          <a-checkbox value="3" name="type">Offline</a-checkbox>
         </a-checkbox-group>
       </a-form-item>
-
-      <a-form-item name="rate" label="Rate">
-        <a-rate v-model:value="formState.rate" allow-half />
+      <a-form-item label="Resources" name="resource">
+        <a-radio-group v-model:value="formState.resource">
+          <a-radio value="1">Sponsor</a-radio>
+          <a-radio value="2">Venue</a-radio>
+        </a-radio-group>
       </a-form-item>
-
-      <a-form-item name="upload" label="Upload" extra="longgggggggggggggggggggggggggggggggggg">
-        <a-upload v-model:fileList="formState.upload" name="logo" action="/upload.do" list-type="picture">
-          <a-button>
-            <template #icon>
-              <UploadOutlined />
-            </template>
-            Click to upload
-          </a-button>
-        </a-upload>
+      <a-form-item label="Activity form" name="desc">
+        <a-textarea v-model:value="formState.desc" />
       </a-form-item>
-
-      <a-form-item label="Dragger">
-        <a-form-item name="dragger" no-style>
-          <a-upload-dragger v-model:fileList="formState.dragger" name="files" action="/upload.do">
-            <p class="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p>
-            <p class="ant-upload-text">Click or drag file to this area to upload</p>
-            <p class="ant-upload-hint">Support for a single or bulk upload.</p>
-          </a-upload-dragger>
-        </a-form-item>
-      </a-form-item>
-
-      <a-form-item :wrapper-col="{ span: 12, offset: 6 }">
-        <a-button type="primary" html-type="submit">Submit</a-button>
+      <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+        <a-button type="primary" @click="onSubmit">Create</a-button>
+        <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script lang="ts" setup name="DemoForm">
-import { defineComponent, reactive } from 'vue';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons-vue';
-const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 14 },
-};
+import type { Dayjs } from "dayjs";
+import { reactive, ref, toRaw } from "vue";
+import type { UnwrapRef } from "vue";
+import type { Rule } from "ant-design-vue/es/form";
 
-const formState = reactive<Record<string, any>>({
-  'input-number': 3,
-  'checkbox-group': ['A', 'B'],
-  rate: 3.5,
+interface FormState {
+  name: string;
+  region: string | undefined;
+  date1: Dayjs | undefined;
+  delivery: boolean;
+  type: string[];
+  resource: string;
+  desc: string;
+}
+const formRef = ref();
+const labelCol = { span: 5 };
+const wrapperCol = { span: 13 };
+const formState: UnwrapRef<FormState> = reactive({
+  name: "",
+  region: undefined,
+  date1: undefined,
+  delivery: false,
+  type: [],
+  resource: "",
+  desc: "",
 });
-const onFinish = (values: any) => {
-  console.log('Success:', values);
+const rules: Record<string, Rule[]> = {
+  name: [
+    {
+      required: true,
+      message: "Please input Activity name",
+      trigger: "change",
+    },
+    { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+  ],
+  region: [
+    {
+      required: true,
+      message: "Please select Activity zone",
+      trigger: "change",
+    },
+  ],
+  date1: [
+    {
+      required: true,
+      message: "Please pick a date",
+      trigger: "change",
+      type: "object",
+    },
+  ],
+  type: [
+    {
+      type: "array",
+      required: true,
+      message: "Please select at least one activity type",
+      trigger: "change",
+    },
+  ],
+  resource: [
+    {
+      required: true,
+      message: "Please select activity resource",
+      trigger: "change",
+    },
+  ],
+  desc: [{ required: true, message: "Please input activity form", trigger: "blur" }],
 };
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
+const onSubmit = () => {
+  formRef.value
+    .validate()
+    .then(() => {
+      console.log("values", formState, toRaw(formState));
+    })
+    .catch((error: Error) => {
+      console.log("error", error);
+    });
+};
+const resetForm = () => {
+  formRef.value.resetFields();
 };
 </script>

@@ -1,91 +1,15 @@
-<style lang="less" scoped>
-@message-width: 80px;
-
-.mgb20 {
-  margin-bottom: 20px;
-}
-
-.grid-message {
-  display: flex;
-  align-items: center;
-  height: @message-width;
-  cursor: pointer;
-}
-
-.grid-msg-right {
-  flex: 1;
-  text-align: center;
-  font-size: 14px;
-  color: #999;
-}
-
-.grid-msg-num {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-.grid-msg-icon {
-  font-size: 50px;
-  width: @message-width;
-  height: @message-width;
-  text-align: center;
-  line-height: @message-width;
-  color: #fff;
-}
-
-.chart-cont {
-  height: 140px;
-
-  >h1 {
-    color: #606266;
-    font-weight: normal;
-    display: flex;
-    font-size: 14px;
-    justify-content: space-between;
-  }
-
-  >p {
-    margin: 0;
-    padding: 0;
-    font-size: 30px;
-    line-height: 40px;
-  }
-
-  >div {
-    height: 60px;
-    width: 100%;
-
-    >p {
-      margin: 0;
-      padding-top: 10px;
-      line-height: 20px;
-      font-size: 12px;
-      color: #909399;
-    }
-  }
-}
-
-.chart-cont2 {
-  height: 240px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-</style>
 <template>
   <div ref="homePage">
     <!-- 待办、已办、办结、消息、预警 -->
     <a-row :gutter="20" class="mgb20">
-      <a-col v-for="(item, index) in messageList" :span="4" :key="index">
+      <a-col v-for="(item, index) in messageList" :key="index" :span="4">
         <a-card :hoverable="true" :body-style="{ padding: '0px' }">
           <div class="grid-message">
-            <component class="grid-msg-icon" :style="{ background: item.color }" :is="item.icon" />
+            <component :is="item.icon" class="grid-msg-icon" :style="{ background: item.color }" />
             <div class="grid-msg-right">
-              <div class="grid-msg-num" :style="{ color: item.color }">{{ item.count }}</div>
+              <div class="grid-msg-num" :style="{ color: item.color }">
+                {{ item.count }}
+              </div>
               <div>{{ item.name }}</div>
             </div>
           </div>
@@ -148,9 +72,7 @@
                 </template>
               </a-dropdown>
             </h1>
-            <p>
-              40000
-            </p>
+            <p>40000</p>
             <div ref="refChart1"></div>
           </div>
         </a-card>
@@ -178,9 +100,7 @@
                 </template>
               </a-dropdown>
             </h1>
-            <p>
-              ￥400,000.00
-            </p>
+            <p>￥400,000.00</p>
             <div ref="refChart2"></div>
           </div>
         </a-card>
@@ -192,9 +112,7 @@
             <h1>
               <span>投入成本</span>
             </h1>
-            <p>
-              ￥380,000.00
-            </p>
+            <p>￥380,000.00</p>
             <div ref="refChart3"></div>
           </div>
         </a-card>
@@ -205,12 +123,12 @@
     <a-row :gutter="20" class="mgb20">
       <a-col :span="8">
         <a-card :hoverable="true" :body-style="{ padding: '10px' }">
-          <div class="chart-cont2" ref="refChart4"></div>
+          <div ref="refChart4" class="chart-cont2"></div>
         </a-card>
       </a-col>
       <a-col :span="16">
         <a-card :hoverable="true" :body-style="{ padding: '10px' }">
-          <div class="chart-cont2" ref="refChart5"></div>
+          <div ref="refChart5" class="chart-cont2"></div>
         </a-card>
       </a-col>
     </a-row>
@@ -222,7 +140,7 @@
           <template #extra>
             <a class="ant-dropdown-link" @click.prevent>更多</a>
           </template>
-          <a-table :dataSource="tableData1" :bordered="true" :columns="columns1" :pagination="false" size="small" />
+          <a-table :data-source="tableData1" :bordered="true" :columns="columns1" :pagination="false" size="small" />
         </a-card>
       </a-col>
       <a-col :span="8">
@@ -230,468 +148,477 @@
           <template #extra>
             <a class="ant-dropdown-link" @click.prevent>更多</a>
           </template>
-          <a-table :dataSource="tableData2" :bordered="false" :columns="columns2" :pagination="false" size="small" />
+          <a-table :data-source="tableData2" :bordered="false" :columns="columns2" :pagination="false" size="small" />
         </a-card>
       </a-col>
     </a-row>
   </div>
 </template>
-
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref } from "vue";
 import * as echarts from "echarts";
-import { onBeforeUnmount } from 'vue';
-import { watch } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { onBeforeUnmount } from "vue";
+import { watch } from "vue";
+import { useElementSize } from "@vueuse/core";
 
-
-const messageList = ref(
-  [{
+const messageList = ref([
+  {
     type: "mytask",
     name: "我的申请",
     count: 10,
     color: "#409EFF",
     icon: "TagFilled",
     linkUrl: "#",
-  }, {
+  },
+  {
     type: "todo",
     name: "代办",
     count: 2,
     color: "#409EFF",
     icon: "FlagFilled",
     linkUrl: "#",
-  }, {
+  },
+  {
     type: "done",
     name: "已办",
     count: 10,
     color: "#67C23A",
     icon: "CheckCircleFilled",
     linkUrl: "#",
-  }, {
+  },
+  {
     type: "conclude",
     name: "办结",
     count: 3,
     color: "#67C23A",
     icon: "CarryOutFilled",
     linkUrl: "#",
-  }, {
+  },
+  {
     type: "message",
     name: "我的消息",
     count: 10,
     color: "#E6A23C",
     icon: "BellFilled",
     linkUrl: "#",
-  }, {
+  },
+  {
     type: "warninng",
     name: "预警信息",
     count: 10,
     color: "#F56C6C",
     icon: "ExclamationCircleFilled",
     linkUrl: "#",
-  }]
-)
+  },
+]);
 
 const tableData1 = [
   {
-    date: '2016-05-03',
-    name: '张三',
-    sex: '男',
-    email: 'zhangsan@134.com',
-    address: '四川省成都市双流区',
+    date: "2016-05-03",
+    name: "张三",
+    sex: "男",
+    email: "zhangsan@134.com",
+    address: "四川省成都市双流区",
   },
   {
-    date: '2016-05-02',
-    name: '李四',
-    sex: '男',
-    email: 'lisi@134.com',
-    address: '四川省成都市高新区',
+    date: "2016-05-02",
+    name: "李四",
+    sex: "男",
+    email: "lisi@134.com",
+    address: "四川省成都市高新区",
   },
   {
-    date: '2016-05-04',
-    name: '王五',
-    sex: '男',
-    email: 'wangwu@134.com',
-    address: '四川省成都市武侯区',
+    date: "2016-05-04",
+    name: "王五",
+    sex: "男",
+    email: "wangwu@134.com",
+    address: "四川省成都市武侯区",
   },
   {
-    date: '2016-05-01',
-    name: '小明',
-    sex: '男',
-    email: 'xiaoming@134.com',
-    address: '四川省成都市郫都区',
+    date: "2016-05-01",
+    name: "小明",
+    sex: "男",
+    email: "xiaoming@134.com",
+    address: "四川省成都市郫都区",
   },
   {
-    date: '2016-05-01',
-    name: '小红',
-    sex: '女',
-    email: 'xiaohong@134.com',
-    address: '四川省成都市锦江区',
+    date: "2016-05-01",
+    name: "小红",
+    sex: "女",
+    email: "xiaohong@134.com",
+    address: "四川省成都市锦江区",
   },
-]
+];
 
 const columns1 = [
   {
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
-    width: 120
+    title: "姓名",
+    dataIndex: "name",
+    key: "name",
+    width: 120,
   },
   {
-    title: '性别',
-    dataIndex: 'sex',
-    key: 'sex',
-    width: 80
+    title: "性别",
+    dataIndex: "sex",
+    key: "sex",
+    width: 80,
   },
   {
-    title: '出生日期',
-    dataIndex: 'date',
-    key: 'date',
-    width: 140
+    title: "出生日期",
+    dataIndex: "date",
+    key: "date",
+    width: 140,
   },
   {
-    title: '邮箱',
-    dataIndex: 'email',
-    key: 'email',
-    width: 180
+    title: "邮箱",
+    dataIndex: "email",
+    key: "email",
+    width: 180,
   },
   {
-    title: '住址',
-    dataIndex: 'address',
-    key: 'address',
+    title: "住址",
+    dataIndex: "address",
+    key: "address",
   },
-]
+];
 
-const tableData2 = [{
-  no: 1,
-  text: '张三发来一条消息'
-}, {
-  no: 2,
-  text: '李四发来一条消息'
-}, {
-  no: 3,
-  text: '王五发来一条消息'
-}, {
-  no: 4,
-  text: '小红发来一条消息'
-}, {
-  no: 5,
-  text: '小明发来一条消息'
-}]
+const tableData2 = [
+  {
+    no: 1,
+    text: "张三发来一条消息",
+  },
+  {
+    no: 2,
+    text: "李四发来一条消息",
+  },
+  {
+    no: 3,
+    text: "王五发来一条消息",
+  },
+  {
+    no: 4,
+    text: "小红发来一条消息",
+  },
+  {
+    no: 5,
+    text: "小明发来一条消息",
+  },
+];
 
 const columns2 = [
   {
-    title: '序号',
-    dataIndex: 'no',
-    key: 'no',
-    width: 80
+    title: "序号",
+    dataIndex: "no",
+    key: "no",
+    width: 80,
   },
   {
-    title: '消息',
-    dataIndex: 'text',
-    key: 'text'
-  }
-]
+    title: "消息",
+    dataIndex: "text",
+    key: "text",
+  },
+];
 
 // 图标1
-let refChart1 = ref();
+const refChart1 = ref();
 let myChart1: echarts.EChartsType;
 const initChart1 = () => {
   if (refChart1.value) {
     //初始化echarts实例
     myChart1 = echarts.init(refChart1.value);
     // 指定图表的配置项和数据
-    let option = {
+    const option = {
       grid: {
         left: 3,
         top: 0,
         right: 3,
-        bottom: 0
+        bottom: 0,
       },
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'shadow'
-        }
+          type: "shadow",
+        },
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         boundaryGap: false,
-        data: ['手机A', '手机B', '手机C', '电脑A', '电脑B', '电脑C', '电脑D'],
-        show: false
+        data: ["手机A", "手机B", "手机C", "电脑A", "电脑B", "电脑C", "电脑D"],
+        show: false,
       },
       yAxis: {
-        type: 'value',
-        max: function (value: { max: number; }) {
+        type: "value",
+        max: function (value: { max: number }) {
           return value.max + 100;
         },
-        show: false
+        show: false,
       },
       series: [
         {
           data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: 'line',
-          areaStyle: {}
-        }
-      ]
+          type: "line",
+          areaStyle: {},
+        },
+      ],
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart1.setOption(option);
   }
-}
+};
 
 // 图标1
-let refChart2 = ref();
+const refChart2 = ref();
 let myChart2: echarts.EChartsType;
 const initChart2 = () => {
   if (refChart2.value) {
     //初始化echarts实例
     myChart2 = echarts.init(refChart2.value);
     // 指定图表的配置项和数据
-    let option = {
+    const option = {
       grid: {
         left: 3,
         top: 0,
         right: 3,
-        bottom: 0
+        bottom: 0,
       },
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'shadow'
-        }
+          type: "shadow",
+        },
       },
       xAxis: [
         {
-          type: 'category',
-          data: ['手机A', '手机B', '手机C', '电脑A', '电脑B', '电脑C', '电脑D'],
+          type: "category",
+          data: ["手机A", "手机B", "手机C", "电脑A", "电脑B", "电脑C", "电脑D"],
           axisTick: {
-            alignWithLabel: true
+            alignWithLabel: true,
           },
-          show: false
-        }
+          show: false,
+        },
       ],
       yAxis: [
         {
-          type: 'value',
-          show: false
-        }
+          type: "value",
+          show: false,
+        },
       ],
       series: [
         {
-          name: '',
-          type: 'bar',
-          barWidth: '60%',
-          data: [20000, 40000, 30000, 90000, 50000, 110000, 130000]
-        }
-      ]
+          name: "",
+          type: "bar",
+          barWidth: "60%",
+          data: [20000, 40000, 30000, 90000, 50000, 110000, 130000],
+        },
+      ],
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart2.setOption(option);
   }
-}
+};
 
 // 图标3
-let refChart3 = ref();
+const refChart3 = ref();
 let myChart3: echarts.EChartsType;
 const initChart3 = () => {
   if (refChart3.value) {
     //初始化echarts实例
     myChart3 = echarts.init(refChart3.value);
     // 指定图表的配置项和数据
-    let option = {
+    const option = {
       grid: {
         left: 3,
         top: 0,
         right: 3,
-        bottom: 0
+        bottom: 0,
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: "axis",
       },
       xAxis: {
-        type: 'category',
+        type: "category",
         boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       },
       yAxis: {
-        type: 'value'
+        type: "value",
       },
       series: [
         {
-          name: '电脑',
-          type: 'line',
-          stack: 'Total',
-          data: [120, 132, 101, 134, 90, 230, 210]
+          name: "电脑",
+          type: "line",
+          stack: "Total",
+          data: [120, 132, 101, 134, 90, 230, 210],
         },
         {
-          name: '手机',
-          type: 'line',
-          stack: 'Total',
-          data: [220, 182, 191, 234, 290, 330, 310]
-        }
-      ]
+          name: "手机",
+          type: "line",
+          stack: "Total",
+          data: [220, 182, 191, 234, 290, 330, 310],
+        },
+      ],
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart3.setOption(option);
   }
-}
+};
 
 // 图标3
-let refChart4 = ref();
+const refChart4 = ref();
 let myChart4: echarts.EChartsType;
 const initChart4 = () => {
   if (refChart4.value) {
     //初始化echarts实例
     myChart4 = echarts.init(refChart4.value);
     // 指定图表的配置项和数据
-    let option = {
+    const option = {
       title: {
-        text: '推广统计',
-        left: 'center'
+        text: "推广统计",
+        left: "center",
       },
       tooltip: {
-        trigger: 'item'
+        trigger: "item",
       },
       legend: {
-        type: 'scroll',
-        orient: 'horizontal',
-        left: 'center',
+        type: "scroll",
+        orient: "horizontal",
+        left: "center",
         bottom: 0,
       },
       series: [
         {
-          name: '数量',
-          type: 'pie',
-          radius: '50%',
+          name: "数量",
+          type: "pie",
+          radius: "50%",
           data: [
-            { value: 1048, name: '搜索引擎' },
-            { value: 735, name: '直接' },
-            { value: 580, name: '邮件' },
-            { value: 484, name: '联合广告' },
-            { value: 300, name: '视频广告' }
+            { value: 1048, name: "搜索引擎" },
+            { value: 735, name: "直接" },
+            { value: 580, name: "邮件" },
+            { value: 484, name: "联合广告" },
+            { value: 300, name: "视频广告" },
           ],
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+            },
+          },
+        },
+      ],
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart4.setOption(option);
   }
-}
+};
 
 // 图标5
-let refChart5 = ref();
+const refChart5 = ref();
 let myChart5: echarts.EChartsType;
 const initChart5 = () => {
   if (refChart5.value) {
     //初始化echarts实例
     myChart5 = echarts.init(refChart5.value);
     // 指定图表的配置项和数据
-    let option = {
+    const option = {
       title: {
-        text: '天气',
-        left: 'center'
+        text: "天气",
+        left: "center",
       },
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'cross',
+          type: "cross",
           crossStyle: {
-            color: '#999'
-          }
-        }
+            color: "#999",
+          },
+        },
       },
       toolbox: {
         feature: {
-          dataView: { title: '数据视图', show: true, readOnly: false },
-          magicType: { title: { line: '折线图', bar: '柱状图' }, show: true, type: ['line', 'bar'] },
-          restore: { title: '刷新', show: true },
-          saveAsImage: { title: '下载', show: true }
-        }
+          dataView: { title: "数据视图", show: true, readOnly: false },
+          magicType: {
+            title: { line: "折线图", bar: "柱状图" },
+            show: true,
+            type: ["line", "bar"],
+          },
+          restore: { title: "刷新", show: true },
+          saveAsImage: { title: "下载", show: true },
+        },
       },
       legend: {
-        data: ['蒸发量', '降水', '温度'],
+        data: ["蒸发量", "降水", "温度"],
         bottom: 0,
       },
       xAxis: [
         {
-          type: 'category',
-          data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+          type: "category",
+          data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
           axisPointer: {
-            type: 'shadow'
-          }
-        }
+            type: "shadow",
+          },
+        },
       ],
       yAxis: [
         {
-          type: 'value',
-          name: '降水',
+          type: "value",
+          name: "降水",
           min: 0,
           max: 250,
           interval: 50,
           axisLabel: {
-            formatter: '{value} ml'
-          }
+            formatter: "{value} ml",
+          },
         },
         {
-          type: 'value',
-          name: '温度',
+          type: "value",
+          name: "温度",
           min: 0,
           max: 25,
           interval: 5,
           axisLabel: {
-            formatter: '{value} °C'
-          }
-        }
+            formatter: "{value} °C",
+          },
+        },
       ],
       series: [
         {
-          name: '蒸发量',
-          type: 'bar',
+          name: "蒸发量",
+          type: "bar",
           tooltip: {
             valueFormatter: function (value: string) {
-              return value + ' ml';
-            }
+              return value + " ml";
+            },
           },
-          data: [
-            2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3
-          ]
+          data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
         },
         {
-          name: '降水',
-          type: 'bar',
+          name: "降水",
+          type: "bar",
           tooltip: {
             valueFormatter: function (value: string) {
-              return value + ' ml';
-            }
+              return value + " ml";
+            },
           },
-          data: [
-            2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3
-          ]
+          data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
         },
         {
-          name: '温度',
-          type: 'line',
+          name: "温度",
+          type: "line",
           yAxisIndex: 1,
           tooltip: {
             valueFormatter: function (value: string) {
-              return value + ' °C';
-            }
+              return value + " °C";
+            },
           },
-          data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-        }
-      ]
+          data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2],
+        },
+      ],
     };
     // 使用刚指定的配置项和数据显示图表。
     myChart5.setOption(option);
   }
-}
+};
 
 //重新渲染图表
 const resizeChart = () => {
@@ -703,7 +630,7 @@ const resizeChart = () => {
     myChart4?.resize();
     myChart5?.resize();
   }, 400);
-}
+};
 
 // 监听页面大小变化
 const homePage = ref();
@@ -733,8 +660,91 @@ onMounted(() => {
 //销毁
 onBeforeUnmount(() => {
   window.removeEventListener("resize", resizeChart);
-})
+});
 
 // defineExpose无需导入，直接使用
 // defineExpose({ value });
 </script>
+
+<style lang="less" scoped>
+@message-width: 80px;
+
+.mgb20 {
+  margin-bottom: 20px;
+}
+
+.grid-message {
+  display: flex;
+  align-items: center;
+  height: @message-width;
+  cursor: pointer;
+}
+
+.grid-msg-right {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}
+
+.grid-msg-num {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.grid-msg-icon {
+  border-radius: 8px;
+  font-size: 50px;
+  width: @message-width;
+  height: @message-width;
+  text-align: center;
+  line-height: @message-width;
+  color: #fff;
+
+  :deep(svg) {
+    margin: auto;
+  }
+}
+
+.chart-cont {
+  height: 140px;
+
+  > h1 {
+    color: #606266;
+    font-weight: normal;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+  }
+
+  > p {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  > div {
+    height: 60px;
+    width: 100%;
+
+    > p {
+      margin: 0;
+      padding-top: 10px;
+      line-height: 20px;
+      font-size: 12px;
+      color: #909399;
+    }
+  }
+}
+
+.chart-cont2 {
+  height: 240px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

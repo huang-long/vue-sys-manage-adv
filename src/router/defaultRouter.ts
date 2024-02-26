@@ -1,16 +1,16 @@
-import type { RouteRecordRaw } from 'vue-router'
-import MainView from '../views/main.vue';
+import type { RouteRecordRaw } from "vue-router";
+import MainView from "../views/main.vue";
 
 //系统默认的路由
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: "/",
     name: "root",
-    redirect: '/login'
+    redirect: "/login",
   },
   {
-    path: '/',
-    name: 'main',
+    path: "/",
+    name: "main",
     component: MainView,
     // children: [{
     //   path: '/login',
@@ -19,9 +19,9 @@ const routes: RouteRecordRaw[] = [
     // }],
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/login/login.vue')
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login/login.vue"),
   },
-]
+];
 export default routes;

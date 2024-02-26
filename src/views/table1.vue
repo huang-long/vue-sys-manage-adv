@@ -3,8 +3,7 @@
     <a-row :gutter="24">
       <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         相关文档：
-        <a href="https://www.antdv.com/components/table-cn#components-table-demo-nested-table" target="_blank">Ant Design Vue
-          Table</a>
+        <a href="https://www.antdv.com/components/table-cn#components-table-demo-nested-table" target="_blank">Ant Design Vue Table</a>
       </a-col>
     </a-row>
 
@@ -52,16 +51,16 @@
   </div>
 </template>
 <script lang="ts" setup name="DemoTable1">
-import { DownOutlined } from '@ant-design/icons-vue';
+import { DownOutlined } from "@ant-design/icons-vue";
 
 const columns = [
-  { title: 'Name', dataIndex: 'name', key: 'name' },
-  { title: 'Platform', dataIndex: 'platform', key: 'platform' },
-  { title: 'Version', dataIndex: 'version', key: 'version' },
-  { title: 'Upgraded', dataIndex: 'upgradeNum', key: 'upgradeNum' },
-  { title: 'Creator', dataIndex: 'creator', key: 'creator' },
-  { title: 'Date', dataIndex: 'createdAt', key: 'createdAt' },
-  { title: 'Action', key: 'operation' },
+  { title: "Name", dataIndex: "name", key: "name" },
+  { title: "Platform", dataIndex: "platform", key: "platform" },
+  { title: "Version", dataIndex: "version", key: "version" },
+  { title: "Upgraded", dataIndex: "upgradeNum", key: "upgradeNum" },
+  { title: "Creator", dataIndex: "creator", key: "creator" },
+  { title: "Date", dataIndex: "createdAt", key: "createdAt" },
+  { title: "Action", key: "operation" },
 ];
 
 interface DataItem {
@@ -79,23 +78,23 @@ for (let i = 0; i < 3; ++i) {
   data.push({
     key: i,
     name: `Screem ${i + 1}`,
-    platform: 'iOS',
-    version: '10.3.4.5654',
+    platform: "iOS",
+    version: "10.3.4.5654",
     upgradeNum: 500,
-    creator: 'Jack',
-    createdAt: '2014-12-24 23:12:00',
+    creator: "Jack",
+    createdAt: "2014-12-24 23:12:00",
   });
 }
 
 const innerColumns = [
-  { title: 'Date', dataIndex: 'date', key: 'date' },
-  { title: 'Name', dataIndex: 'name', key: 'name' },
-  { title: 'Status', key: 'state' },
-  { title: 'Upgrade Status', dataIndex: 'upgradeNum', key: 'upgradeNum' },
+  { title: "Date", dataIndex: "date", key: "date" },
+  { title: "Name", dataIndex: "name", key: "name" },
+  { title: "Status", key: "state" },
+  { title: "Upgrade Status", dataIndex: "upgradeNum", key: "upgradeNum" },
   {
-    title: 'Action',
-    dataIndex: 'operation',
-    key: 'operation',
+    title: "Action",
+    dataIndex: "operation",
+    key: "operation",
   },
 ];
 
@@ -110,9 +109,9 @@ const innerData: innerDataItem[] = [];
 for (let i = 0; i < 3; ++i) {
   innerData.push({
     key: i,
-    date: '2014-12-24 23:12:00',
+    date: "2014-12-24 23:12:00",
     name: `This is production name ${i + 1}`,
-    upgradeNum: 'Upgraded: 56',
+    upgradeNum: "Upgraded: 56",
   });
 }
 </script>

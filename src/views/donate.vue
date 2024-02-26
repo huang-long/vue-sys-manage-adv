@@ -1,7 +1,3 @@
-
-
-<style lang="less" scoped>
-</style>
 <template>
   <div class="container">
     <a-row>
@@ -16,12 +12,11 @@
     <a-row>
       <a-space>
         <a href="https://gitee.com/huanglgln/vue-sys-manage" target="_blank">vue3 + typescript + view ui后台管理系统</a>
-        <a href="https://gitee.com/huanglgln/vue-sys-manage-el" target="_blank">vue3 + typescript + element plus后台管理系统
-        </a>
+        <a href="https://gitee.com/huanglgln/vue-sys-manage-el" target="_blank">vue3 + typescript + element plus后台管理系统</a>
       </a-space>
     </a-row>
   </div>
 </template>
+<script lang="ts" setup name="DemoDonate"></script>
 
-<script lang="ts" setup name="DemoDonate">
-</script>
+<style lang="less" scoped></style>
